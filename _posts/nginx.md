@@ -16,3 +16,9 @@ date: 2020-07-31 11:39:45
 
 #### 熟悉HTTP
 1. web服务器
+
+---
+
+- 测试图片
+![rock](https://azou.tech/blog/static/images/shiprock.jpg)
+
