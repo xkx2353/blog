@@ -20,5 +20,5 @@ date: 2020-07-31 11:39:45
 ---
 
 - 测试图片
-![rock](https://azou.tech/blog/static/image/shiprock.jpg)
+![rock](https://azou.tech/blog/azouever/source/images/shiprock.jpg)
 
