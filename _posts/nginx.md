@@ -1,7 +1,7 @@
 ---
 title: Nginx
 date: 2020-07-31 11:39:45
-top: 9999
+top: 8888
 ---
 ![nginx-logo](https://azou.tech/blog/static/image/nginx-logo.png)
 
