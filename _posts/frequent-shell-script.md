@@ -10,7 +10,7 @@ find . -name 'nohup.log-2020-07-22*' -exec grep --colour=auto -n  -C  5 'SF20200
 ```
 
 ```shell
-# 批量处理文件的一个大概流程：
+# 批量处理文件的一个大概流程:
 #!/bin/bash
 #IFS=,
 #numbers="01,02,03,04,05";
@@ -27,5 +27,10 @@ do
         chmod u+x $file        
     done
 done
+```
+##### ps相关
+```shell
+# 查看的时候把字段名字也展示出来,方便查看
+ps aux | grep -E '(nginx|USER)'
 ```
 
