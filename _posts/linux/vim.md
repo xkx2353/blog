@@ -3,22 +3,22 @@ title: vim的使用历程
 date: 2020-08-09 19:45:05
 ---
 
-### 思维模式
+#### 思维模式
 对于大部分(可以说是百分之九十九)人来说,对于文本编辑就是:噼里啪啦输入,中间夹杂着不少的删除,最后一个回车,把这个其实很复杂的行为简化为非常简单的几个动作当然很好,但是对于经常要文本编辑的工作者来说,可能就不会很好(不是不好,看个人习惯,仅个人看法).需要将这个过程细化,才可以更加高效;我们面对的其实是:单个字符,单个字,单个字符串,单个符号(`()`,`{}`,`[]`,`''`,`""`,`<>`)范围内,单行,单个段落,文本开始,文本末尾等的选择,匹配,替换,移动,编辑,复制,删除等操作.只要将思维想明白了,也就对vim没有那么迷惑了.
-### vim是什么
+#### vim是什么
 熟悉了计算机文本编辑的历史发展,会对vim有一个更好的理解
 vi
 ed
 ex
 vim
 
-### vim中的不同模式
+#### vim中的不同模式
 vim模式粗略的分为:normal,insert,visual;
 
 细分为:
 
 在vim实用技巧中,觉得有一段话写的特好:`一个画家虽然直接在画布上画画的时间很多,但是他们做的最多的工作研究主题,调整光线,把颜料混合成新的色彩等等.所以说画家在休息的时候不把画笔放在画布上.和画家一样,程序员,也只会花一部分时间来编写代码,绝大部分的时间都是在思考,阅读,以及在代码中穿梭浏览.`仔细揣摩,就会明白不同模式存在的意义.
-### 单个字符的含义
+#### 单个字符的含义
 vim
 - `a:`
 - `b:`
@@ -46,12 +46,12 @@ vim
 - `x:`
 - `y:`
 - `z:`
-### 几个列表
+#### 几个列表
 - `jumplist`
 - `changelist`
-### 命令行模式的强大
+#### 命令行模式的强大
 
-### vim中的正则
+#### vim中的正则
 The Vim editor uses regular expressions to specify what to search for.
 Regular expressions are an extremely powerful and compact way to specify a search pattern. Unfortunately, this power comes at a price, because regular expressions are a bit tricky to specify.
 So, do it.
@@ -179,3 +179,9 @@ Use of "\V" means that after it, only a backslash and terminating character
 
 ```
 - 27.\%[]:A sequence of optionally matched atoms. This always matches. It matches as much of the list of atoms it contains as possible.  Thus it stops at the first atom that doesn't match. For example: /r\%[ead] matches "r", "re", "rea" or "read".  The longest that matches is used.
+
+
+#### 参考
+- vim help doc
+- https://vim.fandom.com/wiki/Vim_Tips_Wiki
+- vim 必知必会 [英文版:Practical Vim]
