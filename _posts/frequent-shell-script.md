@@ -34,3 +34,8 @@ done
 ps aux | grep -E '(nginx|USER)'
 ```
 
+##### 一次批量删除redis中匹配的key
+```shell
+redis-cli -h 192.168.4.4 -n 3 -a test --scan --pattern 'xboot:subsernorepeat:*' | xargs redis-cli -h 192.168.4.4 -n 3 -a test -n 3 del
+```
+
