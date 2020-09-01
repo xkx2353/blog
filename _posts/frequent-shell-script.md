@@ -38,4 +38,10 @@ ps aux | grep -E '(nginx|USER)'
 ```shell
 redis-cli -h 192.168.4.4 -n 3 -a test --scan --pattern 'xboot:subsernorepeat:*' | xargs redis-cli -h 192.168.4.4 -n 3 -a test -n 3 del
 ```
+##### 使用awk拼接sql
+```shell
+# test 源文件
+# test_result 结果文件
+awk -F ',' '{print "UPDATE company_account_type SET `virtual_account` = "$1"  WHERE `account_no` = "$2" AND `account_type` = "$3" AND is_deleted = 0;"}' test > test_result
+```
 
