@@ -39,7 +39,98 @@ change the data while updating the record with current data time as per the cons
 ```
 <center><img src="https://azou.tech/blog/static/image/mysql_date_datetime_timestamp.png" ></center>
 <center>From here <a> https://dev.mysql.com/doc/refman/5.7/en/storage-requirements.html</a> </center>
+2. TRUNCATE DROP DELETE区别
+```
+[DELETE] is a DML;It is comparatively slower than TRUNCATE cmd ;We can use the “ROLLBACK” command to restore the tuple.
+[DROP] is a DDL;It is use to drop the whole table,drop the whole structure .Removes the named elements of the schema;Can’t restore the table by using the “ROLLBACK” command
+[TRUNCATE] is a DDL; It is use to delete all the rows of a relation (table) ;It is comparatively faster than delete command as it deletes all the rows fastly. Can’t rollback the data after using the this command
+------------
+The TRUNCATE command is faster than both the DROP and the DELETE command.
+```
 
+3. 对于表的各种修改 ALTER COLUMN CHANGE COLUMN MODIFY COLUMN
+```sql
+-- 添加新的列
+-- MySQL allows you to add the new column as the first column of the table by specifying the FIRST keyword. It also allows you to add the new column after an existing column using the AFTER existing_column clause. If you don’t explicitly specify the position of the new column, MySQL will add it as the last column
+ALTER TABLE table
+ADD [COLUMN] column_name_1 column_1_definition [FIRST|AFTER existing_column],
+ADD [COLUMN] column_name_2 column_2_definition [FIRST|AFTER existing_column],
+...;
+-- 添加到列的最前面
+ALTER TABLE test ADD COLUMN age TINYINT NOT NULL DEFAULT 0 COMMENT '年龄' FIRST;
+-- 添加到指定列的后面
+ALTER TABLE test ADD COLUMN `age` TINYINT NOT NULL DEFAULT 0 COMMENT '年龄' AFTER `name`;
+-- 删除一列
+ALTER TABLE test DROP COLUMN age;
+---------------------------------------------------------------------
+-- CHANGE Used to rename a column, change its datatype, or move it within the schema.
+-- MODIFY Used to do everything CHANGE COLUMN can, but without renaming the column
+-- 修改列名
+ALTER TABLE test CHANGE `test_date` `test_date_for_change` DATE;
+-- 修改属性BY CHANGE
+ALTER TABLE test CHANGE `test_date` `test_date` DATE COMMENT '测试时间';
+-- 修改属性BY MODIFY
+ALTER TABLE test MODIFY `test_datetime` DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '测试datetime';
+-- set the default value for a column
+ALTER TABLE test ALTER COLUMN `age` SET DEFAULT 18;
+-- remove the default value for a column
+ALTER TABLE test ALTER COLUMN `age` DROP DEFAULT;
+-- rename table
+ALTER TABLE `test_rename` RENAME TO `test`;
+```
+4. 对于表的查看
+```sql
+-- 下面两个执行结果一样一样的
+SHOW COLUMNS FROM test;
+DESC test;
+```
+
+5. 对于表数据的插入
+```sql
+-- insert multiple rows
+INSERT INTO table(c1,c2,...)
+VALUES 
+   (v11,v12,...),
+   (v21,v22,...),
+    ...
+   (vnn,vn2,...);
+------------------------------
+-- In theory, you can insert any number of rows using a single INSERT statement. However, when MySQL server receives the INSERT statement whose size is bigger than max_allowed_packet, it will issue a packet too large error and terminates the connection.
+SHOW VARIABLES LIKE 'max_allowed_packet';-- 4194304
+--  set a new value for the max_allowed_packet variable
+SET GLOBAL max_allowed_packet=size;
+-- where size is an integer that represents the number the maximum allowed packet size in bytes.
+-- Note that the max_allowed_packet has no influence on the INSERT INTO .. SELECT statement. The INSERT INTO .. SELECT statement can insert as many rows as you want.
+------------------------------
+INSERT INTO table_name(column_list)
+SELECT 
+   select_list 
+FROM 
+   another_table
+WHERE
+   condition;
+------------------------------
+-- update data if a duplicate in the UNIQUE index or PRIMARY KEY error occurs when you insert a row into a table.
+INSERT INTO table (column_list)
+VALUES (value_list)
+ON DUPLICATE KEY UPDATE
+   c1 = v1, 
+   c2 = v2,
+   ...;
+------------------------------
+-- When you use the INSERT statement, if an error occurs during the processing,the rows with invalid data that cause the error are ignored and the rows with valid data are inserted into the table
+INSERT IGNORE INTO table(column_list)
+VALUES( value_list),
+      ( value_list),
+      ...
+```
+
+6. 对于表索引的添加
+```sql
+-- 下面两个执行结果一样一样的
+SHOW COLUMNS FROM test;
+DESC test;
+```
 ##### 好玩的
 
 ```lua
