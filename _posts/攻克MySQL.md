@@ -131,6 +131,38 @@ VALUES( value_list),
 SHOW COLUMNS FROM test;
 DESC test;
 ```
+7. 一些特殊的查询用法
+```sql
+-- GROUP BY age WITH ROLLUP 汇总之后的记录进行再次汇总
+SELECT COALESCE(age, '总人数'),age,COUNT(*) FROM test GROUP BY age WITH ROLLUP;
+```
+8. 表连接
+```sql
+-- 内连接 选择出几个表中都匹配的记录
+
+-- 外连接 匹配的和不匹配的都有可能选出来
+
+-- 左外连接 以左表为准，左表的记录都会展示出来，右表里面的匹配的会展示出来
+
+-- 右外连接 以右表为准，右表的记录都会展示出来，左表里面的匹配的会展示出来
+
+------------------------
+-- UNION 和 UNION ALL 的区别
+
+-- UNION:only keeps unique records
+-- UNION first performs a sorting operation and eliminates of the records that are duplicated across all columns before finally returning the combined data set
+-- UNION ALL:keeps all records,including duplicates
+
+```
+
+##### 一些函数使用
+```sql
+-- Return the first non-null value in a list:
+SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com');
+-- W3Schools.com
+```
+
+
 ##### 好玩的
 
 ```lua
