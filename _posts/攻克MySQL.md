@@ -138,13 +138,38 @@ SELECT COALESCE(age, '总人数'),age,COUNT(*) FROM test GROUP BY age WITH ROLLU
 ```
 8. 表连接
 ```sql
--- 内连接 选择出几个表中都匹配的记录
-
+-- 交叉连接/笛卡尔积/cross join
+SELECT * FROM test CROSS JOIN test2 CROSS JOIN test3;
+SELECT * FROM test,test2,test3;
+-- 内连接 选择出几个表中同时满足条件的记录
+SELECT * FROM test
+INNER JOIN test2 t ON test.cert_no = t.cert_no;
+SELECT * FROM test
+JOIN test2 t ON test.cert_no = t.cert_no;
+SELECT * FROM test,test2 WHERE test.cert_no = test2.cert_no;
+-- 自连接
+SELECT * FROM test INNER JOIN test ON test.id = test.c_id;
 -- 外连接 匹配的和不匹配的都有可能选出来
-
 -- 左外连接 以左表为准，左表的记录都会展示出来，右表里面的匹配的会展示出来
+SELECT * from test LEFT OUTER JOIN test2 t ON test.cert_no = t.cert_no;
+SELECT * from test LEFT JOIN test2 t ON test.cert_no = t.cert_no
+-- 查询在test中，不在test2中
+SELECT * from test LEFT JOIN test2 t ON test.name = t.name WHERE t.name IS NULL;
 
 -- 右外连接 以右表为准，右表的记录都会展示出来，左表里面的匹配的会展示出来
+
+-- 全连接/查询在test中和在test2中的所有
+SELECT * from test LEFT JOIN  test2 t ON test.name = t.name 
+UNION
+SELECT * FROM test2 LEFT JOIN test t2 ON test2.name = t2.name;
+
+-- 查询只在test中和只在test2中
+SELECT * from test LEFT JOIN  test2 t ON test.name = t.name WHERE t.name IS NULL
+UNION 
+SELECT * FROM test2 LEFT JOIN test t2 ON test2.name = t2.name WHERE t2.name IS NULL;
+
+
+
 
 ------------------------
 -- UNION 和 UNION ALL 的区别
@@ -173,5 +198,6 @@ string.rep('hahaha\t', 10)
 
 ##### 参考
 - https://www.tutorialspoint.com/lua/index.htm
+- https://www.zsythink.net/archives/1105
 
 
