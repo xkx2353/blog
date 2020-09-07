@@ -4,6 +4,7 @@ date: 2020-09-05 13:11:07
 ---
 ##### 数据库基本介绍
 > 先没有系统的记录，就是想起来哪些，然后记录下来，后续进行系统一点
+> 全部测试于MySQL V5.6.23
 
 1. 范式。
 2. 关系型数据库和非关系型数据库。
@@ -185,6 +186,19 @@ SELECT * FROM test2 LEFT JOIN test t2 ON test2.name = t2.name WHERE t2.name IS N
 -- Return the first non-null value in a list:
 SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com');
 -- W3Schools.com
+-------------------------------------------------------------------------
+-- 关于 CHAR_LENGTH() LENGTH();
+-- MySQL CHAR_LENGTH() returns the length (how many characters are there) of a given string. The function simply counts the number characters and ignore whether the character(s) are single-byte or multi-byte. Therefore a string containing three 2-byte characters, LENGTH() function will return 6, whereas CHAR_LENGTH() function will returns 3
+
+SELECT CHAR_LENGTH('test string'); -- 11
+SELECT LENGTH('test string'); -- 11
+
+SELECT CHAR_LENGTH('你好'); -- 2
+SELECT LENGTH('你好'); -- 6
+-------------------------------------------------------------------------
+SELECT TIMESTAMPDIFF(DAY,'2012-10-01','2013-01-13');
+-------------------------------------------------------------------------
+SELECT CHAR(67,72,65,82);  -- CHAR
 ```
 
 ##### 数据类型
@@ -193,6 +207,8 @@ SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com');
 -- decimal在MySQL内部中以字符串的形式存在，比浮点数更为准确，适合用来表示精度特别高的数据。用（M,D）来表示，M表示整数和小数一共的位数，D表示小数位数，如果不写，会按照decimal(10,0)来处理，超过会报错。
 -- 位类型 BIT(M),表示存放多多位二进制数，M的范围是1-64，默认1位，插入的时候会首先把数据转换成为二进制数
 ```
+<center><img src="https://azou.tech/blog/static/image/char_varchar_difference.png" ></center>
+<center>From here <a> https://www.tutorialspoint.com/What-is-the-difference-between-CHAR-and-VARCHAR-in-MySQL</a> </center>
 
 ##### 比较运算符
 ```sql
@@ -200,6 +216,69 @@ SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com');
 -- NULL<=>NULL的比较结果是1，<=> 称为 NULL-safe 的等于运算符
 
 ```
+##### 不同的存储引擎
+> 常见的存储引擎：MyISAM、InnoDB、MERGE、MEMORY(HEAP)、BDB(BerkeleyDB)等
+> 每种引擎技术使用不同的存储机制、索引技巧、锁定水平并且最终提供广泛的不同的功能和能力。如何存储数据；如何为存储的数据建立索引；如何更新、查询数据 等技术的实现方法。然后不同的数据库或者表可以选择不同的引擎来存储数据
+> 参考：https://juejin.im/post/6844903795281887245
+
+- InnoDB 
+	- 事务
+	- 行级锁
+	- 外键 不过不喜欢用
+	- 适合处理多重并发的更新请求
+	- 关于Hash索引的支持：https://blog.csdn.net/doctor_who2004/article/details/77414742
+	
+- MyISAM 独立于操作系统，我们建立一个MyISAM引擎的表时，就会在本地磁盘上建立三个文件，文件名就是表名，demo.frm，存储表定义；demo.MYD，存储数据；demo.MYI，存储索引。
+	- 筛选大量数据时非常迅速，不是很清楚
+	- 并发插入特性允许同时选择和插入数据，不是很清楚
+
+- MEMORY 出发点是速度，为得到最快的响应时间，采用的逻辑存储介质是系统内存。
+	- 支持散列索引和B树索引
+
+- CSV 出发点是速度，为得到最快的响应时间，采用的逻辑存储介质是系统内存。
+	- 所有列必须强制指定 NOT NULL
+
+- ARCHIVE 归档， 仅仅支持最基本的插入和查询
+	- 所有列必须强制指定 NOT NULL
+
+- BLACKHOLE 任何写入到此引擎的数据均会被丢弃掉， 不做实际存储；Select语句的内容永远是空，和Linux中的 /dev/null 文件完成的作用完全一致
+	- 不存储数据，但是会记录Binlog
+	- 可以提供一些检测的场景使用 
+	- 验证语法 验证dump file语法的正确性
+	- 检测负载 以使用blackhole引擎来检测binlog功能所需要的额外负载
+	- 检测性能 由于blackhole性能损耗极小，可以用来检测除了存储引擎这个功能点之外的其他MySQL功能点的性能。
+
+##### 事务
+> MyISAM 不支持事务，InnoDB支持事务，所以所有关于事务， 隔离级别，排它锁， 共享锁， MVCC (当前读 VS 快照读)， select .. for update (排它锁)， select .. lock in share mode(共享锁) 都是针对InnoDB， 也是Innodb拥有事务特性的所有描述，也是Innodb比myisam好的地方。
+
+- 事务拥有四个重要的特性：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability），习惯称之为 ACID 特性
+- 原子性 事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。
+- 一致性 指事务将数据库从一种状态转变为另一种一致的的状态。
+- 隔离性 在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。锁机制来保证。
+- 持久性 事务一旦提交，则其结果就是永久性的。即使发生宕机的故障，数据库也能将数据恢复。
+
+
+##### 隔离级别
+> 不同的隔离级别对事务的处理能力会有不同程度的影响
+> 在 InnoDB 中，默认为 REPEATABLE 级别，但是我们生产上一般设置READ COMMITTED
+> READ COMMITTED 能够避免脏读取，而且具有较好的并发性能。尽管它会导致不可重复读、幻读和第二类丢失更新这些并发问题，在可能出现这类问题的个别场合，可以由应用程序采用悲观锁或乐观锁来控制。
+
+- READ UNCOMMITTED
+	- 带来问题：脏读 ，幻读，不可重复读取
+- READ COMMITTED 
+	- 带来问题：幻读，不可重复读取
+- REPEATABLE READ
+	- 带来问题：幻读，BUT InnoDB 中使用一种被称为 next-key locking 的策略来避免幻读（phantom）现象的产生
+- SERIALIZABLE
+	- 带来问题：事务只能一个接着一个地执行，不能并发执行。
+
+>脏读、幻读、不可重复读的概念
+
+- 脏读 指一个事务中访问到了另外一个事务未提交的数据
+- 幻读 一个事务读取2次，得到的记录条数不一致。
+- 不可重复读 一个事务读取同一条记录2次，得到的结果不一致
+
+>隔离级别的实现
 
 ##### 好玩的
 
