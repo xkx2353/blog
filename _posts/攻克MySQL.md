@@ -239,7 +239,6 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 	- 所有列必须强制指定 NOT NULL
 
 - ARCHIVE 归档， 仅仅支持最基本的插入和查询
-	- 所有列必须强制指定 NOT NULL
 
 - BLACKHOLE 任何写入到此引擎的数据均会被丢弃掉， 不做实际存储；Select语句的内容永远是空，和Linux中的 /dev/null 文件完成的作用完全一致
 	- 不存储数据，但是会记录Binlog
@@ -257,8 +256,9 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 - 隔离性 在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。锁机制来保证。
 - 持久性 事务一旦提交，则其结果就是永久性的。即使发生宕机的故障，数据库也能将数据恢复。
 
+> SavePoint
 
-##### 隔离级别
+##### 隔离级别和锁
 > 不同的隔离级别对事务的处理能力会有不同程度的影响
 > 在 InnoDB 中，默认为 REPEATABLE 级别，但是我们生产上一般设置READ COMMITTED
 > READ COMMITTED 能够避免脏读取，而且具有较好的并发性能。尽管它会导致不可重复读、幻读和第二类丢失更新这些并发问题，在可能出现这类问题的个别场合，可以由应用程序采用悲观锁或乐观锁来控制。
@@ -279,6 +279,53 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 - 不可重复读 一个事务读取同一条记录2次，得到的结果不一致
 
 >隔离级别的实现
+
+- READ UNCOMMITTED 完全不加锁
+- SERIALIZABLE 读的时候加共享锁，其他事务可以并发读，但是不能写，写的时候加排他锁，其他事务既不能读也不能写
+- REPEATABLE READ 采用MVCC(Multi Versioning Concurrency Control)方式。一条记录会有多个版本，也就是数据会有多个快照。可重复读会在事务开始的时候生成一个全局数据的当前快照
+- READ COMMITTED 每次执行语句都重新生成一次快照
+
+> 当前读和快照读
+> 
+
+- 当前读 读取的是最新版本，update、delete、insert、select…lock in share mode、select…for update都是锁定读。
+通过加record lock和gap lock间隙锁来实现，也就是next-key lock。使用next-key lock优势是获取实时数据，但是需要加锁。
+
+- 快照读  基于MVCC 通过undo log存储数据快照
+	- READ COMMITTED 每次SELECT都会生成一个快照读，每个快照都是最新的，所以在当前事务中每次都可以看到其他事务提交的更改。
+	
+	- REPEATABLE READ 开启事务后第一个SELECTt语句才是快照读的地方，而不是一开启事务就快照读，只有当前事务对数据进行更新的时候才会更新快照，在第一次SELECT之前其他事务提交的数据是可以看到的，在SELECT之后其他事务提交的数据在当前事务是看不到的。
+	
+> FOR UPDATE
+> 
+
+`select * from test for update` 可以锁表/锁行。应尽量使用锁行
+
+```sql
+
+-- 明确指定主键，有数据，row lock
+SELECT * FROM test WHERE id= 3 FOR UPDATE;
+-- 明确指定主键，无此数据，会产生记录锁和间隙锁
+SELECT * FROM test WHERE id= -1  FOR UPDATE;
+-- 无主键，table lock
+SELECT * FROM test WHERE name='xkx' FOR UPDATE;
+-- 主键不明确，table lock
+SELECT * FROM test WHERE id != 3 FOR UPDATE;
+-- 主键不明确，table lock
+SELECT * FROM test WHERE id LIKE '%3%' FOR UPDATE;
+
+```
+> 锁
+> 
+
+1. InnoDB 行锁是通过给索引上的索引项加锁来实现的，InnoDB 这种行锁实现特点意味着：只有通过索引条件检索数据，InnoDB 才使用行级锁，否则，InnoDB 将使用表锁！
+2. Mysql 为了满足事务的隔离性，必须在 commit 才释放锁。
+3. 在普通索引列上，不管是何种查询，只要加锁，都会产生间隙锁，这跟唯一索引不一样；
+4. 在普通索引跟唯一索引中，数据间隙的分析，数据行是优先根据普通索引排序，再根据唯一索引排序。
+5. 间隙锁会封锁该条记录相邻两个键之间的空白区域，防止其它事务在这个区域内插入、修改、删除数据，这是为了防止出现 幻读 现象
+6. 记录锁、间隙锁、临键锁，都属于排它锁
+7. 共享锁就是多个事务对于同一数据可以共享一把锁，都能访问到最新数据。
+8. 根据非唯一索引 对记录行进行 UPDATE \ FOR UPDATE \ LOCK IN SHARE MODE 操作时，InnoDB 会获取该记录行的 临键锁 ，并同时获取该记录行下一个区间的间隙锁
 
 ##### 好玩的
 
