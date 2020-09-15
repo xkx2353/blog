@@ -5,8 +5,8 @@ date: 2020-08-05 13:45:09
 
 ##### find相关
 ```shell
-# 使用-exec查找并执行
-find . -name 'nohup.log-2020-07-22*' -exec grep --colour=auto -n  -C  5 'SF2020072217505400001' {} \;
+# 使用-exec查找并执行正则匹配
+find . -name 'nohup.log-2020-07-22*' -exec grep --colour=auto -n -H -C  5 'SF2020072217505400001' {} \;
 ```
 
 ```shell

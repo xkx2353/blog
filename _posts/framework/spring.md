@@ -2,6 +2,77 @@
 title: Spring中的一些细节
 date: 2020-09-13 19:10:13
 ---
+
+##### spring容器启动的一个过程
+1. 准备资源以及校验必要参数，property source；
+2. 创建基本ioc容器，BeanDefinition加载入IOC容器中；
+3. 设置beanFactory的基本属性（类加载器，表达式解析器，添加beanPostProcessor,添加忽略自动装配的接口，添加特定bean对应的依赖注册environment，systemProperties，systemEnvironment）
+
+##### spring中Bean的一个生命周期
+> 实例化和初始化的区别
+> 实例化：是对象创建的过程。比如使用构造方法new对象，为对象在内存中分配空间；
+> 初始化：是为对象中的属性赋值的过程；
+> 这个初始化和bean中的init-method初始化方法是两个概念
+> 这里仅仅考虑单例bean
+1. 实例化前置处理 InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation
+2. 实例化
+3. 实例化后置处理 InstantiationAwareBeanPostProcessor#postProcessAfterInstantiation
+4. 实例化后，属性设置前调用 InstantiationAwareBeanPostProcessor#postProcessProperties
+5. 初始化（属性注入）
+6. setBeanName（BeanNameAware）
+7. setBeanClassLoader（BeanClassLoaderAware）
+8. setBeanFactory（BeanFactoryAware）
+9. 调用初始化方法前置处理BeanPostProcessor#applyBeanPostProcessorsBeforeInitialization
+10. 属性注入完成后调用InitializingBean#afterPropertiesSet
+10. 调用初始化方法invokeInitMethods
+11. 调用初始化方法后置处理applyBeanPostProcessorsAfterInitialization
+12. 放入缓存池
+13. 容器销毁DisposableBean#destory
+14. 指定的destroy-method
+
+##### spring中单例是如何实现的
+
+
+##### spring中是如何解决循环依赖的
+> spring处理循环依赖的三种情况：
+> 构造器的循环依赖：这种依赖spring是处理不了的，直接抛BeanCurrentlylnCreationException异常； 
+> 单例模式下的setter循环依赖：通过“三级缓存”处理循环依赖；
+> 非单例循环依赖：无法处理；
+
+单例模式下setter处理
+```java
+
+/** 
+* Cache of singleton objects: bean name –> bean instance
+* 完成初始化的单例对象的cache（一级缓存）
+*/
+private final Map singletonObjects = new ConcurrentHashMap(256);
+
+/** 
+* Cache of singleton factories: bean name –> ObjectFactory
+* 进入实例化阶段的单例对象工厂的cache
+* allowEarlyReference=true
+* 加入singletonFactories三级缓存的前提是执行了构造器
+*/
+private final Map> singletonFactories = new HashMap>(16);
+
+/** 
+* Cache of early singleton objects: bean name –> bean instance
+* 完成实例化但是尚未初始化（属性填充）的，提前暴光的单例对象的Cache 
+*/
+private final Map earlySingletonObjects = new HashMap(16);
+
+/** Names of beans that are currently in creation. */
+// 这个缓存也十分重要，它表示bean创建过程中都会在里面呆着
+// 它在Bean开始创建时放值，创建完成时会将其移出
+private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
+
+```
+
+##### ignoreDependencyInterface和ignoreDependencyType
+> ignoreDependencyInterface 自动装配时忽略该接口实现类中和setter方法入参相同的类型，也就是忽略该接口实现类中存在依赖外部的bean属性注入。\
+> ignoreDependencyType 自动装配时忽略某个类或者接口的实现
+
 ##### 关于BeanDefinition
 >  A BeanDefinition describes a bean instance, which has property values,
  constructor argument values
@@ -34,9 +105,11 @@ date: 2020-09-13 19:10:13
    qualifiers,AutowireCandidateQualifier
    methodOverrides
    synthetic,Set whether this bean definition is 'synthetic', that is, not defined by the     application itself (for example, an infrastructure bean such as a helper for auto-     proxying, created through {<aop:config>})
+   ```
   ```
-```
-	
+
+  ```
+
 2. Full-fledged classes
 
    ```latex
@@ -44,6 +117,7 @@ date: 2020-09-13 19:10:13
    ChildBeanDefinition,
    GenericBeanDefinition,
     
+   ```
 ```
 
 3. 注解相关AnnotatedBeanDefinition
@@ -52,7 +126,7 @@ date: 2020-09-13 19:10:13
    AnnotatedGenericBeanDefinition,
    ScannedGenericBeanDefinition,
    ConfigurationClassBeanDefinition
-   ```
+```
 
 
 ##### id和name属性都可以在XML元数据中唯一标识某个Bean实例
@@ -136,5 +210,7 @@ string.rep('hahaha\t', 10)
 ##### 参考
 - https://juejin.im/post/6844903959136567310
 - https://blog.csdn.net/weixin_41927463/article/details/106089245
+- https://juejin.im/post/6844904142750613511
+- https://cloud.tencent.com/developer/article/1497692
 
 
