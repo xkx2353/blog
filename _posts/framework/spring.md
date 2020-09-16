@@ -3,10 +3,19 @@ title: Spring中的一些细节
 date: 2020-09-13 19:10:13
 ---
 
-##### spring容器启动的一个过程
+##### spring容器启动的一个过程（refresh过程）
 1. 准备资源以及校验必要参数，property source；
 2. 创建基本ioc容器，BeanDefinition加载入IOC容器中；
 3. 设置beanFactory的基本属性（类加载器，表达式解析器，添加beanPostProcessor,添加忽略自动装配的接口，添加特定bean对应的依赖注册environment，systemProperties，systemEnvironment）
+4. 添加一些beanPostProcessor；
+5. 就是先查找BeanDefinitionRegistryPostProcessor接口实现并执行postProcessBeanDefinitionRegistry方法，然后再查找执行BeanFactoryPostProcessor接口的实现，并执行postProcessBeanFactory方法；
+6. 注册BeanPostProcessor实现类；
+7. 初始化消息资源的默认空处理DelegatingMessageSource；
+8. 初始化事件广播器SimpleApplicationEventMulticaster；
+9. 实例化web服务，比如ServletContext上下文配置，tomcat初始化配置等（ServletWebServerApplicationContext的实现）；
+10. 查找注册ApplicationListener实现的监听器；
+11. 遍历BeanFacotry当中的BeanDefinition数据，然后调用getBean方法来实例化及依赖注入等，完成容器所有bean（non-lazy-init）的实例化工作；
+12. 完成刷新工作，清除缓存；注册LifecycleProcessor的实现DefaultLifecycleProcessor并调用onRefresh方法；发布刷新事件；启动web服务等。在整个refresh方法的最后，就是调用各种清除缓存的方法了。
 
 ##### spring中Bean的一个生命周期
 > 实例化和初始化的区别
