@@ -45,3 +45,11 @@ redis-cli -h 192.168.4.4 -n 3 -a test --scan --pattern 'xboot:subsernorepeat:*' 
 awk -F ',' '{print "UPDATE company_account_type SET `virtual_account` = "$1"  WHERE `account_no` = "$2" AND `account_type` = "$3" AND is_deleted = 0;"}' test > test_result
 ```
 
+##### maven依赖相关
+```shell
+# 项目依赖树
+mvn dependency:tree >> project.tree
+# 分析当前项目的依赖
+mvn dependency:analyze >> project.analyze
+```
+
