@@ -4,6 +4,10 @@ title: Spring中的一些细节
 
 date: 2020-09-13 19:10:13
 
+tags: [Spring Framework]
+
+categories: [spring的理解]
+
 ---
 
 ##### spring容器启动的一个过程（refresh过程）

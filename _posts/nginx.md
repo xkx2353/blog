@@ -6,7 +6,7 @@ date: 2020-07-31 11:39:45
 
 tags: [Nginx Http协议 Web服务器]
 
-categories: [服务端的那些门口哨兵]
+categories: [服务端的门口哨兵]
 
 ---
 ![nginx-logo](https://azou.tech/blog/static/image/nginx-logo.png)

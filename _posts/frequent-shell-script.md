@@ -4,6 +4,10 @@ title: 常用的shell脚本和一些好用的命令
 
 date: 2020-08-05 13:45:09
 
+tags: [Linux CLI]
+
+categories: [我要学Linux]
+
 ---
 
 ##### find相关
@@ -61,3 +65,73 @@ mvn dependency:tree >> project.tree
 mvn dependency:analyze >> project.analyze
 ```
 
+##### socket统计信息，端口使用相关
+
+> ss from iproute2 
+> 
+> 命令使用详细参考 [这里](https://wangchujiang.com/linux-command/c/ss.html)
+
+```sh
+# 经Mac下测试使用
+lsof -nP -iTCP -sTCP:LISTEN
+# 经Centos下测试使用
+# 显示套接字（socket）使用概况
+ss -s
+# 显示监听状态的tcp套接字（socket）使用概况，显示进程，显示ip
+ss -tlnp
+
+# 显示所有状态为established的SMTP连接
+ss -o state established '( dport = :smtp or sport = :smtp )' 
+# 显示所有状态为Established的HTTP连接
+ss -o state established '( dport = :http or sport = :http )' 
+# 列举出处于 FIN-WAIT-1状态的源端口为 80或者 443，目标网络为 193.233.7/24所有 tcp套接字
+ss -o state fin-wait-1 '( sport = :http or sport = :https )' dst 193.233.7/24  
+```
+
+##### 网络io监测相关
+
+> nload 命令 网路状态和各IP所使用的频宽。[Detail](https://www.tecmint.com/nload-monitor-linux-network-traffic-bandwidth-usage/#:~:text=nload%20is%20a%20command%2Dline,and%20min%2Fmax%20network%20usage.)
+> 
+> nethogs 命令 按进程或程序实时统计网络带宽使用率。它只能实时监控进程的网络带宽占用情况。[Detail](https://www.tecmint.com/nethogs-monitor-per-process-network-bandwidth-usage-in-real-time/#:~:text=NetHogs%20is%20an%20open%20source,small%20'net%20top'%20tool.)
+> 
+>  dstat 命令 性能测试、基准测试和排除故障过程中可以很方便监控系统运行状况。可以将详细信息通过cvs输出到一个文件。[Detail](https://blog.csdn.net/yue530tomtom/article/details/75443305)
+> 
+>  sar 命令 Linux系统运行状态统计和性能分析工具，可从磁盘IO、CPU负载、内存使用等多个维度对系统活动进行报告。[Detail](http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/sar.html)
+> 
+> iptraf 命令 会有简单界面显示出来详细信息 [Detail](https://blog.csdn.net/quiet_girl/article/details/50777210) 
+> 
+> iftop 命令
+> 
+> tcpdump 抓包命令  [Detail](https://juejin.im/post/6844904084168769549)
+> 
+> RX==receive，接收，从开启到现在接收封包的情况，是下行流量。
+>  
+> TX==Transmit，发送，从开启到现在发送封包的情况，是上行流量。
+> 
+> 
+
+```sh
+# 经Mac下测试使用
+# 不显示流量图，只显示统计数据。
+nload -m
+# 经Centos下测试使用
+# 监测eth0网卡的流量
+nload eth0
+
+```
+
+##### 词典的使用
+> aspell 命令对于各种文件内容进行拼写检查
+
+```sh
+#  经Mac下测试使用
+# 然后进入交互模式，可以给出的单词进行拼写建议
+aspell -a 
+
+# 交互式检查文件内容单词拼写情况
+aspell check file.xkx
+```
+
+##### 参考
+
+- [Linux System Monitoring Tools Every SysAdmin Should Know](https://www.cyberciti.biz/tips/top-linux-monitoring-tools.html)
