@@ -145,8 +145,40 @@ private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFrom
 	
 	```
 
+##### 不同的scope
+> 参考：https://juejin.im/post/6844903974475137031
+> 
+> singleton
+> 
+> 是spring容器中bean的默认作用域。它告诉容器仅创建和管理一个bean类实例。该单个实例存储在此类单例bean的缓存中，并且对该命名bean的所有后续请求和引用都返回该缓存的实例。
+>
+> prototype
+> 
+> 每次应用程序对Bean进行请求时，原型作用域都会创建一个新的Bean实例。
+>
+> request
+> 
+> 在请求范围中，容器为每个HTTP请求创建一个新实例。因此，如果服务器当前处理50个请求，那么容器最多可以有50个bean类的单独实例。对一个实例的任何状态更改对其他实例都是不可见的。一旦请求完成，这些实例就会被销毁。
+>
+> session
+> 
+> 在会话范围中，容器为每个HTTP会话创建一个新实例。因此，如果服务器有20个活动会话，那么容器最多可以有20个bean类的单独实例。在单个会话生命周期内的所有HTTP请求都可以访问该会话范围内相同的单个bean实例。
+在会话范围内，对一个实例的任何状态更改对其他实例都是不可见的。一旦会话在服务器上被销毁/结束，这些实例就会被销毁。
+>
+> application
+> 
+> 应用程序作用域bean是每个ServletContext的单例对象，而单例作用域bean是每个ApplicationContext的单例对象。请注意，单个应用程序可能有多个应用程序上下文；用程序作用域bean作为ServletContext属性可见
+> 
+> websocket
+> 
+> websocket范围内的bean通常是单例的，并且比任何单独的WebSocket会话寿命更长。
+> 
+> 自定义线程作用域
+> 
+> Spring还使用类SimpleThreadScope提供了非默认线程作用域。若要使用此作用域，必须使用CustomScopeConfigurer类将其注册到容器；对bean的每个请求都将在同一线程中返回相同的实例
 
 ##### id和name属性都可以在XML元数据中唯一标识某个Bean实例
+
 1. 通常情况下，id用于定义Bean实例的名称(beanName)，而name用于定义Bean实例的别名(aliases)。一个Bean实例可以有多个别名，在name属性中用半角逗号或分号分隔各个别名即可；
 2. bean元素的id和name属性都不是必填项，但如果配置了id或name，其属性值不能与另一个bean元素的id或name属性值重复，必须保证当前Bean在整个容器环境中的唯一性；
 3. 通常bean元素指定id属性值是最常用的一种配置方式。对于这种方式，容器会将id值当作beanName来完成后续的解析和编组工作。如果不指定id，也可通过name属性来配置bean；
