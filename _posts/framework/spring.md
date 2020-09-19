@@ -1,6 +1,9 @@
 ---
+
 title: Spring中的一些细节
+
 date: 2020-09-13 19:10:13
+
 ---
 
 ##### spring容器启动的一个过程（refresh过程）
@@ -23,6 +26,7 @@ date: 2020-09-13 19:10:13
 > 初始化：是为对象中的属性赋值的过程；
 > 这个初始化和bean中的init-method初始化方法是两个概念
 > 这里仅仅考虑单例bean
+
 1. 实例化前置处理 InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation
 2. 实例化
 3. 实例化后置处理 InstantiationAwareBeanPostProcessor#postProcessAfterInstantiation
@@ -48,7 +52,8 @@ date: 2020-09-13 19:10:13
 > 单例模式下的setter循环依赖：通过“三级缓存”处理循环依赖；
 > 非单例循环依赖：无法处理；
 
-单例模式下setter处理
+单例模式下setter方式循环依赖处理
+
 ```java
 
 /** 
@@ -61,13 +66,13 @@ private final Map singletonObjects = new ConcurrentHashMap(256);
 * Cache of singleton factories: bean name –> ObjectFactory
 * 进入实例化阶段的单例对象工厂的cache
 * allowEarlyReference=true
-* 加入singletonFactories三级缓存的前提是执行了构造器
+* 加入singletonFactories的前提是执行了构造器（三级缓存）
 */
 private final Map> singletonFactories = new HashMap>(16);
 
 /** 
 * Cache of early singleton objects: bean name –> bean instance
-* 完成实例化但是尚未初始化（属性填充）的，提前暴光的单例对象的Cache 
+* 完成实例化但是尚未初始化（属性填充）的，提前暴光的单例对象的Cache（二级缓存）
 */
 private final Map earlySingletonObjects = new HashMap(16);
 
@@ -90,8 +95,9 @@ private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFrom
  and other bean metadata.
 
 1. BeanDefinition及抽象基类属性介绍
+
 	```latex
-	 scope
+	scope
    role
    parentName
    beanClassName
@@ -114,10 +120,8 @@ private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFrom
    qualifiers,AutowireCandidateQualifier
    methodOverrides
    synthetic,Set whether this bean definition is 'synthetic', that is, not defined by the     application itself (for example, an infrastructure bean such as a helper for auto-     proxying, created through {<aop:config>})
+ 
    ```
-  ```
-
-  ```
 
 2. Full-fledged classes
 
@@ -127,7 +131,6 @@ private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFrom
    GenericBeanDefinition,
     
    ```
-```
 
 3. 注解相关AnnotatedBeanDefinition
 
@@ -135,7 +138,8 @@ private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFrom
    AnnotatedGenericBeanDefinition,
    ScannedGenericBeanDefinition,
    ConfigurationClassBeanDefinition
-```
+	
+	```
 
 
 ##### id和name属性都可以在XML元数据中唯一标识某个Bean实例
@@ -198,8 +202,11 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 ##### Bean实例化策略(createBeanInstance)
 
 Supplier回调方式
+
 工厂方法初始化
+
 构造函数自动注入初始化
+
 默认构造函数初始化:
 	如果该bean没有配置lookup-method、replace-method或者@LookUp注解，则直接通过反射的方式实例化bean对象即可；
 	如果存在覆盖，则需要使用CGLIB进行动态代理，因为在创建代理的同时可将动态方法织入类中；
@@ -212,7 +219,6 @@ Supplier回调方式
 string.rep('hahaha\t', 10)
 
 ```
-
 
 
 

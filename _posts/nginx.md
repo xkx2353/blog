@@ -1,14 +1,20 @@
 ---
+
 title: Nginx
+
 date: 2020-07-31 11:39:45
+
 tags: [Nginx Http协议 Web服务器]
+
 categories: [服务端的那些门口哨兵]
+
 ---
 ![nginx-logo](https://azou.tech/blog/static/image/nginx-logo.png)
 
 #### Nginx出现在哪里
 
 > 执行流程，module的功能在特定的流程处理阶段得到执行，和conf里面的配置顺序没有关系
+
 - <span style="color: #00802b;"><strong>POST_READ</strong></span> The `ngx_http_realip_module` registers its handler at this phase to enable substitution of client addresses before any other module is invoked
 -  <span style="color: #00802b;"><strong>SERVER_REWRITE</strong></span> Rewrite directives defined in a server block (but outside a location block) are processed
 -  <span style="color: #00802b;"><strong>FIND_CONFIG</strong></span> Special phase where a location is chosen based on the request URI
