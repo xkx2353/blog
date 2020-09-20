@@ -68,6 +68,7 @@ date: 2020-09-18 15:42:17
 > 写在前面
 > 
 > dubbo的基本设计原则是采用URL作为配置信息的统一格式，所有拓展点都通过传递URL携带配置信息。
+> 以URL为总线，运行过程中所有的状态数据信息都可以通过URL来获取，比如当前系统采用什么序列化，采用什么通信，采用什么负载均衡等信息，都是通过URL的参数来呈现的，所以在框架运行过程中，运行到某个阶段需要相应的数据，都可以通过对应的Key从URL的参数列表中获取
 
 ###### 注册中心模块
 
@@ -111,6 +112,69 @@ date: 2020-09-18 15:42:17
 ###### 序列化模块
 >  封装了各类序列化框架的支持实现。序列化也支持扩展。
 > 
+
+###### SPI机制
+> Jdk的SPI，Dubbo的SPI，SpringBoot的SPI
+>
+>SPI的全名为Service Provider Interface，面向对象的设计里面，模块之间推荐基于接口编程，而不是对实现类进行硬编码，这样做也是为了模块设计的可拔插原则。
+>为了在模块装配的时候不在程序里指明是哪个实现，就需要一种服务发现的机制。
+>
+>jdk的spi就是为某个接口寻找服务实现。jdk提供了服务实现查找的工具类：java.util.ServiceLoader，它会去加载META-INF/service/目录下的配置文件。
+>JDK标准的SPI只能通过遍历来查找扩展点和实例化，有可能导致一次性加载所有的扩展点，如果不是所有的扩展点都被用到，就会导致资源的浪费。
+>
+>Dubbo把SPI配置文件中扩展实现的格式修改，例如META-INF/dubbo/com.xxx.Protocol里的com.foo.XxxProtocol格式改为了xxx = com.foo.XxxProtocol这种以键值对的形式，这样做的目的是为了让我们更容易的定位到问题，
+>
+>
+>dubbo的SPI机制增加了对IOC、AOP的支持，一个扩展点可以直接通过setter注入到其他扩展点。
+>
+>
+>
+>
+1. @SPI，在某个接口上加上@SPI注解后，表明该接口为可扩展接口。如下:
+
+```java
+//在Protocol上有@SPI("dubbo")注解。
+// 而这个protocol属性值或者默认值会被当作该接口的实现类中的一个key，
+// dubbo会去META-INF/dubbo/internal/com.alibaba.dubbo.rpc.Protocol文件中找该key对应的value
+@SPI("dubbo")
+public interface Protocol {
+
+}
+```
+
+2. @Adaptive，该注解为了保证dubbo在内部调用具体实现的时候不是硬编码来指定引用哪个实现，也就是为了适配一个接口的多种实现。
+这样做符合模块接口设计的可插拔原则，也增加了整个框架的灵活性，该注解也实现了扩展点自动装配的特性。
+- 实现类上面加上@Adaptive注解，表明该实现类是该接口的适配器。
+dubbo中的ExtensionFactory接口就有一个实现类AdaptiveExtensionFactory，加了@Adaptive注解，AdaptiveExtensionFactory就不提供具体业务支持，用来适配ExtensionFactory的SpiExtensionFactory和SpringExtensionFactory这两种实现。AdaptiveExtensionFactory会根据在运行时的一些状态来选择具体调用ExtensionFactory的哪个实现，
+- 在接口方法上加@Adaptive注解，dubbo会动态生成适配器类。有该注解的方法的参数必须包含URL，ExtensionLoader会通过createAdaptiveExtensionClassCode方法动态生成一个Transporter$Adaptive类。
+```java
+//@Adaptive注解中有一些key值，比如connect方法的注解中有两个key，分别为“client”和“transporter”，
+// URL会首先去取client对应的value来作为注解@SPI中写到的key值，
+// 如果为空，则去取transporter对应的value，
+// 如果还是为空，则会根据SPI默认的key，也就是netty去调用扩展的实现类，
+// 如果@SPI没有设定默认值，则会抛出IllegalStateException异常。
+@SPI("netty")
+public interface Transporter {
+    /**
+     * Connect to a server.
+     */
+    @Adaptive({Constants.CLIENT_KEY, Constants.TRANSPORTER_KEY})
+    Client connect(URL url, ChannelHandler handler) throws RemotingException;
+```
+
+3. @Activate，扩展点自动激活加载的注解，
+就是用条件来控制该扩展点实现是否被自动激活加载，在扩展实现类上面使用，实现了扩展点自动激活的特性，它可以设置两个参数，分别是group和value。
+
+```java
+//META-INF/dubbo/com.alibaba.dubbo.rpc.Filter，内容为：
+//clearXbootContext=com.xboot.core.config.dubbo.ClearXbootContextFilter
+//当配置了xxx参数，并且参数为有效值时激活，比如配了cache="lru"，自动激活CacheFilter。
+@Activate(group = "provider", value = "xxx", order = -10000) // 只对提供方激活，group可选"provider"或"consumer"
+public class ClearXbootContextFilter implements Filter {
+    // ...
+}
+```
+
 
 ##### 好玩的
 ```lua
