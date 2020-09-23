@@ -79,12 +79,11 @@ U is seldom useful in practice, but is often accidentally pressed instead of u, 
 ```
 语法: `:{range}norm[al][!] {commands}`
 normal命令使得在命令行模式执行普通模式命令成为可能。撤销操作会撤销所有的命令。
-如果某行执行命令时发生错误，不会影响其他行的命令执行，即vim normal命令是在所有目标行上 并行 执行。
+如果某行执行命令时发生错误，不会影响其他行的命令执行，即vim normal命令是在所有目标行上 并行 执行。这里的的 并行 意在类比并联电路的健壮性，从本质上来说，vim仍然是顺序地执行宏，而不会真正地并发执行多处修改。
 normal命令中的可选参数 ! 用于指示vim在当前命令中不使用任何vim映射；如果没有显式使用 ! 选项，即便是执行一个非递归映射 (noremap) 命令，它的参数仍有可能被重新映射。
 例如，假设已经设置了vim映射 :nnoremap G dd，则在vim普通模式按下 G 将执行命令 dd，即会删除一整行；此时，若在vim命令行模式下执行命令 :normal G 同样将删除当前行而不会跳转到当前文件的末行。
 为了在即便 G 命令已经被设置了映射的条件下也能在vim normal命令中不改变 G 命令原始的含义，需要使用 :normal! G。通过 ! 选项显式指示Vim在当前命令中不使用任何vim映射。
 所以，在任何时候写Vim脚本时，都建议总是使用 normal!，永远不要使用 normal 而给自己埋下不确定性的问题。
-
 
 
 ```
@@ -128,6 +127,7 @@ attention the three dots;
 To match the "-" character itself make it the first or last one in the range.
 
 - 16.Predefined:
+
 ```
         \s      whitespace character: <Space> and <Tab>         /\s
         \S      non-whitespace character; opposite of \s        /\S
@@ -167,6 +167,7 @@ example: "\_." matches any character or a line break.
 - 19."\<" and "\>" are used to find only whole words.
 - 20.`\&`:"foobeep\&..." matches "foo" in "foobeep";`".*Peter\&.*Bob" `matches in a line containing both "Peter" and "Bob".
 - 21.
+
 ```
         /star   *       \*      0 or more       as many as possible
         /\+     \+      \+      1 or more       as many as possible
@@ -187,6 +188,7 @@ example: "\_." matches any character or a line break.
 ```
 
 - 22.zero-width::
+
 ```
         /\@>    \@>     \@>     1, like matching a whole pattern
         /\@=    \@=     \@=     nothing, requires a match /zero-width
@@ -207,6 +209,7 @@ Use of "\V" means that after it, only a backslash and terminating character
 - 24.`\@>` Observe this difference: "a*b" and "a*ab" both match "aaab", but in the second case the "a*" matches only the first two "a"s.  "\(a*\)\@>ab" will not match "aaab", because the "a*" matches the "aaa" (as many "a"s as possible), thus the "ab" can't match.
 
 - 25.
+
  ``` 
     \%V  Match inside the Visual area. `/\%Vxuan\%V`
     \%#  Example, to highlight the word under the cursor.`/\k*\%#\k*`
@@ -236,5 +239,6 @@ Use of "\V" means that after it, only a backslash and terminating character
 
 #### 参考
 - vim help doc
+- https://vimjc.com
 - https://vim.fandom.com/wiki/Vim_Tips_Wiki
 - vim 必知必会 [英文版:Practical Vim]
