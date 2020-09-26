@@ -218,6 +218,52 @@ public class ClearXbootContextFilter implements Filter {
 > 方法级优先，接口级次之，全局配置再次之。
 如果级别一样，则消费方优先，提供方次之。
 
+###### 服务提供方的异步执行和服务消费方的异步调用
+
+> 服务消费方的异步调用
+> 
+> 基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小。
+> 
+
+``` Java
+// 调用直接返回CompletableFuture
+CompletableFuture<String> future = asyncService.sayHello("async call request");
+// 增加回调
+future.whenComplete((v, t) -> {
+    if (t != null) {
+        t.printStackTrace();
+    } else {
+        System.out.println("Response: " + v);
+    }
+});
+// 早于结果输出
+System.out.println("Executed before response return.");
+```
+> 服务提供方的异步执行
+> 
+> Provider端异步执行将阻塞的业务从Dubbo内部线程池切换到业务自定义线程，避免Dubbo线程池的过度占用，有助于避免不同服务间的互相影响。异步执行无益于节省资源或提升RPC响应性能，因为如果业务执行需要阻塞，则始终还是要有线程来负责执行。
+> 
+
+``` Java
+// 业务执行已从Dubbo线程切换到业务线程，避免了对Dubbo线程池的阻塞。
+public class AsyncServiceImpl implements AsyncService {
+    @Override
+    public CompletableFuture<String> sayHello(String name) {
+        RpcContext savedContext = RpcContext.getContext();
+        // 建议为supplyAsync提供自定义线程池，避免使用JDK公用线程池
+        return CompletableFuture.supplyAsync(() -> {
+            System.out.println(savedContext.getAttachment("consumer-key1"));
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "async response from provider.";
+        });
+    }
+}
+```
+
 ##### 好玩的
 
 ```lua

@@ -162,6 +162,15 @@ du -sh [目录名] 返回该目录的大小
 du -sm [文件夹] 返回该文件夹总M数
 ```
 
+##### 一些常用的处理文件的脚本
+
+> 从一次面试决定开始记录，提交shell编写能力，想到可以从leecode上面看一些shell题目
+
+###### 文本中出现某些字符频率排名
+
+
+
+
 ##### 参考
 
 - [Linux System Monitoring Tools Every SysAdmin Should Know](https://www.cyberciti.biz/tips/top-linux-monitoring-tools.html)

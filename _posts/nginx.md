@@ -51,9 +51,36 @@ categories: [服务端的门口哨兵]
     - Then regular expressions are checked, in **the order of their appearance in the configuration file**. The search of regular expressions terminates on the first match, and the corresponding configuration is used
     - If no match with a regular expression is found then **the configuration of the prefix location remembered earlier is used**
 
+#### Nginx负载均衡策略
+
+- 随机 random
+- 轮询（默认）每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
+- weight 指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。权重越高，在被访问的概率越大。
+- ip_hash 可以采用ip_hash指令解决这个问题，如果客户已经访问了某个服务器，当用户再次访问时，会将该请求通过哈希算法，自动定位到该服务器。每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器。
+- fair（第三方）按后端服务器的响应时间来分配请求，响应时间短的优先分配。
+- url_hash（第三方）使每个url定向到同一个（对应的）后端服务器，后端服务器为缓存时比较有效。
+- least_conn（最少连接数）按照保持的连接数。一般来说保持的连接数越多说明处理的任务越多，也是最繁忙的，可以将请求分配给其他机器处理。
+
+##### 故障节点摘除与恢复
+- max_fails=number
+这个参数决定了多少次请求后端失败后会暂停这个业务节点，不再给它发新的请求，默认值是1。此参数需要配合fail_timeout一起用。
+
+题外话：如何定义失败，有很多种类型，这里因为主要处理HTTP代理，所以更关注proxy_next_upstream。
+proxy_next_upstream：主要定义了当服务节点出现状况时，会将请求发给其他节点，也就是定义了怎么算作业务节点失败。
+
+- fail_timeout=time
+
+决定了当Nginx认定这个节点不可用时，暂停多久。不配置默认就是10s。
+
+把上面两个参数联合起来考虑就是：当Nginx发现发送到这个节点上的请求失败了3次的时候，就会把这个节点摘除，摘除时间是30s，30s后才会再次发送请求到这个节点上。
+
+- backup
+
+类似于switch语句中的default，当主要节点都挂了的时候，会把请求打到这个backup节点。这是最后一个救兵了。
+
 
 #### Nginx优秀的第三方扩展
-1. Openresty
+1. OpenResty
 
 #### 熟悉HTTP
 1. web服务器
@@ -62,5 +89,7 @@ categories: [服务端的门口哨兵]
 
 
 > 参考
+
 - [nginx-org](http://nginx.org/en/docs/)
+- https://juejin.im/post/6844904019043811342
 
