@@ -74,6 +74,23 @@ date: 2020-09-18 15:42:17
 
 > dubbo的注册中心实现有Multicast、Zookeeper、Redis、Nacos、Consul、Etcd、Eureka、Sofa、Simple，这个模块就是封装了dubbo所支持的注册中心的实现。官方推荐Zookeeper。
 
+- Zookeeper
+  1. Provider向zookeeper注册自身的url，生成一个临时的znode
+  
+  2. Provider从Dubbo容器中退出，停止提供RPC调用。也就是移除zookeeper内自身url对应的znode
+  
+  3. Consumer订阅 " /dubbo/…Service/providers" 目录的子节点，生成ChildListener
+  
+  4. Consumer从Dubbo容器中退出，移除之前创建的ChildListener
+  
+  5. 当Dubbo里的zookeeper Client和Server重新连接上时，将之前注册的的URL添加入这几个失败集合中，然后重新注册和订阅。
+  
+  6. 当重新连接时( 重新连接意味着之前连接断开了 )，将已经注册和订阅的URL添加到失败集合中，定时重试，也就是重新注册和订阅
+  
+  7. zookeeper Server宕机了，Dubbo里的Client并没有对此事件做什么响应，当然其内部的zkClient会不停地尝试连接Server。当Zookeeper Server宕机了不影响Dubbo里已注册的组件的RPC调用，因为已经通过URL生成了Invoker对象，这些对象还在Dubbo容器内。当然因为注册中心宕机了，肯定不能感知到新的Provider。同时因为在之前订阅获得的Provider信息已经持久化到本地文件，当Dubbo应用重启时，如果zookeeper注册中心不可用，会加载缓存在文件内的Provider信息，还是能保证服务的高可用。
+  
+     Consumer会一直维持着对Provider的ChildListener，监听Provider的实时数据信息。当Providers节点的子节点发生变化时，实时通知Dubbo，更新URL，同时更新Dubbo容器内的Consumer Invoker对象，只要是订阅成功均会实时同步Provider，更新Invoker对象，无论是第一次订阅还是断线重连后的订阅。
+
 ###### 集群模块
 > 将多个服务提供方伪装为一个提供方，包括：负载均衡, 容错，路由等，集群的地址列表可以是静态配置的，也可以是由注册中心下发。
 > 
