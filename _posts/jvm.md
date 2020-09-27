@@ -120,8 +120,13 @@ Java虚拟机本身会始终引用这些类加载器，而这些类加载器则�
 3. 子类在收到父类无法加载的时候，才会自己去加载
 
 > 双亲委派模型的破坏
+> 
+> 当高层提供了统一接口让低层去实现，同时又要是在高层加载（或实例化）低层的类时，必须通过线程上下文类加载器来帮助高层的ClassLoader找到并加载该类。
+> 
 > 上下文类加载器默认情况下就是Application ClassLoader。
+> 
 
+> 服务加载器在Java SE 6后才开始作为公共API出现，作为一个简单的服务提供者加载设施。ServiceLoader也像ClassLoader一样，能装载类文件，但是使用时有区别，具体区别如下：（1） ServiceLoader装载的是一系列有某种共同特征的实现类（例如实现同一个接口），而ClassLoader是个万能加载器；（2）ServiceLoader装载时需要特殊的配置（配置文件中标明要加载的类URL），使用时也与ClassLoader有所区别；（3）ServiceLoader还实现了Iterator接口；（4）ServiceLoader不支持并发。
 
 tomcat 类加载器
 
