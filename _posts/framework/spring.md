@@ -6,7 +6,7 @@ date: 2020-09-13 19:10:13
 
 tags: [Spring Framework]
 
-categories: [spring的理解]
+categories: [Spring的理解]
 
 ---
 
@@ -125,7 +125,7 @@ private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFrom
    methodOverrides
    synthetic,Set whether this bean definition is 'synthetic', that is, not defined by the     application itself (for example, an infrastructure bean such as a helper for auto-     proxying, created through {<aop:config>})
  
-   ```
+  ```
 
 2. Full-fledged classes
 
