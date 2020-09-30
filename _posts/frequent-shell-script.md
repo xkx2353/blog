@@ -10,6 +10,10 @@ categories: [我要学Linux]
 
 ---
 
+> 使用不同的解释器「bash,zsh...」编写脚本的时候对于[某些语法可能不同](https://apple.stackexchange.com/questions/361870/what-are-the-practical-differences-between-bash-and-zsh#:~:text=Bash%20uses%20.,t%20always%20a%20perfect%20equivalence.)
+>
+>example：Bash **arrays** are indexed from 0 to (length-1). Zsh arrays are indexed from 1 to length。
+
 ##### grep相关
 
 ```sh
