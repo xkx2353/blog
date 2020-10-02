@@ -19,7 +19,7 @@ date: 2020-09-05 13:11:07
 4. 按操作对象进行分类，分为三类：库操作，表操作，数据操作；
 
 ##### 一些问题记录
-1. 关于日期时间类型：DATE，DATESTAMP，TIMESTAMP 的区别？
+- 关于日期时间类型：DATE，DATESTAMP，TIMESTAMP 的区别？
 
 ```
 DATE保存精度到天，格式为：YYYY-MM-DD，如 2020-09-05;
@@ -43,8 +43,10 @@ change the data while updating the record with current data time as per the cons
 ```
 <center><img src="https://azou.tech/blog/static/image/mysql_date_datetime_timestamp.png" ></center>
 <center>From here <a> https://dev.mysql.com/doc/refman/5.7/en/storage-requirements.html</a> </center>
-2. TRUNCATE DROP DELETE区别
-```
+
+- TRUNCATE DROP DELETE区别
+
+```latex
 [DELETE] is a DML;It is comparatively slower than TRUNCATE cmd ;We can use the “ROLLBACK” command to restore the tuple.
 [DROP] is a DDL;It is use to drop the whole table,drop the whole structure .Removes the named elements of the schema;Can’t restore the table by using the “ROLLBACK” command
 [TRUNCATE] is a DDL; It is use to delete all the rows of a relation (table) ;It is comparatively faster than delete command as it deletes all the rows fastly. Can’t rollback the data after using the this command
@@ -52,7 +54,8 @@ change the data while updating the record with current data time as per the cons
 The TRUNCATE command is faster than both the DROP and the DELETE command.
 ```
 
-3. 对于表的各种修改 ALTER COLUMN CHANGE COLUMN MODIFY COLUMN
+- 对于表的各种修改 ALTER COLUMN CHANGE COLUMN MODIFY COLUMN
+
 ```sql
 -- 添加新的列
 -- MySQL allows you to add the new column as the first column of the table by specifying the FIRST keyword. It also allows you to add the new column after an existing column using the AFTER existing_column clause. If you don’t explicitly specify the position of the new column, MySQL will add it as the last column
@@ -82,14 +85,16 @@ ALTER TABLE test ALTER COLUMN `age` DROP DEFAULT;
 -- rename table
 ALTER TABLE `test_rename` RENAME TO `test`;
 ```
-4. 对于表的查看
+- 对于表的查看
+
 ```sql
 -- 下面两个执行结果一样一样的
 SHOW COLUMNS FROM test;
 DESC test;
 ```
 
-5. 对于表数据的插入
+- 对于表数据的插入
+
 ```sql
 -- insert multiple rows
 INSERT INTO table(c1,c2,...)
@@ -129,7 +134,10 @@ VALUES( value_list),
       ...
 ```
 
-6. 对于表索引的添加
+- 索引维护
+
+> 生活中随处可见索引的例子，如火车站的车次表、图书的目录等。它们的原理都是一样的，通过不断的缩小想要获得数据的范围来筛选出最终想要的结果，同时把随机的事件变成顺序的事件，也就是我们总是通过同一种查找方式来锁定数据。
+
 ```sql
 -- 表索引区分度，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要join的字段我们都要求是0.1以上，即平均1条扫描10条记录
 SELECT count(DISTINCT col)/count(*);
@@ -138,12 +146,15 @@ SELECT count(DISTINCT col)/count(*);
 SHOW COLUMNS FROM test;
 DESC test;
 ```
-7. 一些特殊的查询用法
+
+- 一些特殊的查询用法
+
 ```sql
 -- GROUP BY age WITH ROLLUP 汇总之后的记录进行再次汇总
 SELECT COALESCE(age, '总人数'),age,COUNT(*) FROM test GROUP BY age WITH ROLLUP;
 ```
-8. 表连接
+
+- 表连接
 ```sql
 -- 交叉连接/笛卡尔积/cross join
 SELECT * FROM test CROSS JOIN test2 CROSS JOIN test3;
@@ -257,7 +268,7 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 	- 检测性能 由于blackhole性能损耗极小，可以用来检测除了存储引擎这个功能点之外的其他MySQL功能点的性能。
 
 ##### 事务
-> MyISAM 不支持事务，InnoDB支持事务，所以所有关于事务， 隔离级别，排它锁， 共享锁， MVCC (当前读 VS 快照读)， select .. for update (排它锁)， select .. lock in share mode(共享锁) 都是针对InnoDB， 也是Innodb拥有事务特性的所有描述，也是Innodb比myisam好的地方。
+> MyISAM 不支持事务，InnoDB支持事务，所以所有关于事务， 隔离级别，排它锁， 共享锁， MVCC (当前读 && 快照读)， select .. for update (排它锁)， select .. lock in share mode(共享锁) 都是针对InnoDB， 也是Innodb拥有事务特性的所有描述，也是Innodb比myisam好的地方。
 
 - 事务拥有四个重要的特性：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability），习惯称之为 ACID 特性
 - 原子性 事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。
@@ -277,7 +288,7 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 - READ COMMITTED 
 	- 带来问题：幻读，不可重复读取
 - REPEATABLE READ
-	- 带来问题：幻读，BUT InnoDB 中使用一种被称为 next-key locking 的策略来避免幻读（phantom）现象的产生
+	- 带来问题：幻读，BUT InnoDB 中使用一种被称为 next-key locking 的策略来避免幻读（phantom）现象的产生，但是不能完全避免，如果在事务在执行的过程中进行语句需要当前读，就会读到另一个事务提交的最新的数据。
 - SERIALIZABLE
 	- 带来问题：事务只能一个接着一个地执行，不能并发执行。
 
@@ -337,8 +348,28 @@ SELECT * FROM test WHERE id LIKE '%3%' FOR UPDATE;
 7. 共享锁就是多个事务对于同一数据可以共享一把锁，都能访问到最新数据。
 8. 根据非唯一索引 对记录行进行 UPDATE \ FOR UPDATE \ LOCK IN SHARE MODE 操作时，InnoDB 会获取该记录行的临键锁 ，并同时获取该记录行下一个区间的间隙锁
 
-> 千万级表优化
-> 
+##### 索引指南
+
+> 生活中随处可见索引的例子，如火车站的车次表、图书的目录等。它们的原理都是一样的，通过不断的缩小想要获得数据的范围来筛选出最终想要的结果，同时把随机的事件变成顺序的事件，也就是我们总是通过同一种查找方式来锁定数据。
+
+N叉树「我习惯叫多叉树」。以 InnoDB 的一个整数字段索引为例，这个 N 差不多是 1200。这棵树高是 4 的时候，就可以存 1200 的 3 次方个值，这已经 17 亿了。考虑到树根的数据块总是在内存中的，一个 10 亿行的表上一个整数字段的索引，查找一个值最多只需要访问 3 次磁盘。其实，树的第二层也有很大概率在内存中，那么访问磁盘的平均次数就更少了。
+
+主键索引的叶子节点存的是整行数据。在 InnoDB 里，主键索引也被称为聚簇索引（clustered index）；非主键索引的叶子节点内容是主键的值。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）
+
+> N的大小可以调整吗？
+> N是由页大小和索引大小决定的
+
+> 索引重建
+
+1. 索引可能因为删除，或者页分裂等原因，导致数据页有空洞，重建索引的过程会创建一个新的索引，把数据按顺序插入，这样页面的利用率最高，也就是索引更紧凑、更省空间。
+2. `alter table T engine=InnoDB`
+
+> 索引下推优化
+
+1. 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。
+
+##### 千万级表优化
+
 
 1. 执行计划很好，但是就是查询很慢，是不是应该强制使用索引呢？
 
@@ -365,14 +396,20 @@ SELECT * FROM test WHERE id LIKE '%3%' FOR UPDATE;
 
    
 
-   
-
 
 > 一些技巧
 > 
 
 1. 行转列如何转
 
+
+> 从MySQL小册学习到的
+> 
+
+1. 一条语句的执行流程：
+2. 关于binlog和redolog：
+3. 回滚记录：实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。
+4. 尽量不要使用长事务：长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间；长事务还占用锁资源，也可能拖垮整个库。
 
 ##### 好玩的
 
@@ -385,5 +422,4 @@ string.rep('hahaha\t', 10)
 ##### 参考
 - https://www.tutorialspoint.com/lua/index.htm
 - https://www.zsythink.net/archives/1105
-
-
+- [MySQL索引原理及慢查询优化](https://www.mtyun.com/library/mysql-index)
