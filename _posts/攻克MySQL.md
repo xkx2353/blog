@@ -131,6 +131,9 @@ VALUES( value_list),
 
 6. 对于表索引的添加
 ```sql
+-- 表索引区分度，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要join的字段我们都要求是0.1以上，即平均1条扫描10条记录
+SELECT count(DISTINCT col)/count(*);
+
 -- 下面两个执行结果一样一样的
 SHOW COLUMNS FROM test;
 DESC test;
@@ -173,8 +176,6 @@ UNION
 SELECT * FROM test2 LEFT JOIN test t2 ON test2.name = t2.name WHERE t2.name IS NULL;
 
 
-
-
 ------------------------
 -- UNION 和 UNION ALL 的区别
 
@@ -182,6 +183,11 @@ SELECT * FROM test2 LEFT JOIN test t2 ON test2.name = t2.name WHERE t2.name IS N
 -- UNION first performs a sorting operation and eliminates of the records that are duplicated across all columns before finally returning the combined data set
 -- UNION ALL:keeps all records,including duplicates
 
+-- JOIN的时候ON和USING的使用 Specifically, any columns mentioned in the USING list will appear only once
+-- 两个表不同的字段名字，两个表列都会显示出来
+SELECT * FROM world.City JOIN world.Country ON (City.CountryCode = Country.Code) WHERE ...
+-- 两个表相同的字段名字,相同的列只会出现一次
+SELECT ... FROM film JOIN film_actor USING (film_id) WHERE ...
 ```
 
 ##### 一些函数使用
@@ -291,8 +297,9 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 > 当前读和快照读
 > 
 
-- 当前读 读取的是最新版本，update、delete、insert、select…lock in share mode、select…for update都是锁定读。
-通过加record lock和gap lock间隙锁来实现，也就是next-key lock。使用next-key lock优势是获取实时数据，但是需要加锁。
+- 当前读 读取的是最新版本，update、delete、insert、select…lock in share mode、select…for update都是锁定读。通过加record lock和gap lock间隙锁来实现，也就是next-key lock。使用next-key lock优势是获取实时数据，但是需要加锁，防止幻读，但是不能彻底解决幻读。
+
+  当一个事务t1开始，在另一个事务t2开始执行插入数据column1之后，t1才开始进行操作，那么column1对于t1可见。
 
 - 快照读  基于MVCC 通过undo log存储数据快照
 	- READ COMMITTED 每次SELECT都会生成一个快照读，每个快照都是最新的，所以在当前事务中每次都可以看到其他事务提交的更改。
@@ -334,8 +341,31 @@ SELECT * FROM test WHERE id LIKE '%3%' FOR UPDATE;
 > 
 
 1. 执行计划很好，但是就是查询很慢，是不是应该强制使用索引呢？
-2. 面对一个4亿的表应该如何处理
-3. 
+
+   ```sql
+   -- 分析是否是取值limit太大，超过count的1/3，Innodb引擎不使用索引
+   SELECT * FROM `database`.`table` FORCE INDEX(create_time) WHERE create_time >= 1508360400 and create_time <= 1508444806 ORDER BY create_time asc LIMIT 4000, 1000;
+   ```
+
+2. 相同的sql在不同的从库执行，一个未使用索引，分析是索引文件或者表的碎片导致，是表的碎片问题导致产生的执行计划不正常
+
+   ```sql
+   -- 方案1：执行OPTIMIZE TABLE修复碎片或者执行ALTER TABLE foo ENGINE=InnoDB，以上两种操作都会锁表，对于数据量大，且业务高峰期执行需要慎重
+   -- 方案2：强制索引，也就是FORCE index create_time，强制mysql 引擎使用索引，这里需要注意一下，当使用强制索引时，存储引擎会检查强制索引是否可用，如果不可用，还需要扫描表来判断那种执行计划，
+   ```
+
+3. 关于分页优化
+
+   ```sql
+   -- 日常分页SQL语句,扫描满足条件的10020行，扔掉前面的10000行，返回最后的20行
+   SELECT id,name,content FROM users ORDER BY id ASC LIMIT 100000,20;
+   -- 如果记录了上次的最大ID，扫描20行
+   SELECT id,NAME,content FROM users WHERE id>100073 ORDER BY id ASC LIMIT 20;
+   ```
+
+   
+
+   
 
 
 > 一些技巧
