@@ -54,6 +54,12 @@ change the data while updating the record with current data time as per the cons
 The TRUNCATE command is faster than both the DROP and the DELETE command.
 ```
 
+##### 语句的执行顺序
+
+
+
+##### 常用的语句
+
 - 对于表的各种修改 ALTER COLUMN CHANGE COLUMN MODIFY COLUMN
 
 ```sql
@@ -201,7 +207,7 @@ SELECT * FROM world.City JOIN world.Country ON (City.CountryCode = Country.Code)
 SELECT ... FROM film JOIN film_actor USING (film_id) WHERE ...
 ```
 
-##### 一些函数使用
+- 函数使用
 ```sql
 -- Return the first non-null value in a list:
 SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com');
@@ -222,6 +228,7 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 ```
 
 ##### 数据类型
+
 ```sql
 -- 分为三大类：数值类型；日期时间类型；字符串类型；
 -- decimal在MySQL内部中以字符串的形式存在，比浮点数更为准确，适合用来表示精度特别高的数据。用（M,D）来表示，M表示整数和小数一共的位数，D表示小数位数，如果不写，会按照decimal(10,0)来处理，超过会报错。
@@ -231,10 +238,9 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 <center>From here <a> https://www.tutorialspoint.com/What-is-the-difference-between-CHAR-and-VARCHAR-in-MySQL</a> </center>
 
 ##### 比较运算符
-```sql
+```mysql
 -- 记录不太清楚的点 NULL=NULL的比较结果是NULL，也就是NULL不能通过=来进行比较
 -- NULL<=>NULL的比较结果是1，<=> 称为 NULL-safe 的等于运算符
-
 ```
 ##### 不同的存储引擎
 > 常见的存储引擎：MyISAM、InnoDB、MERGE、MEMORY(HEAP)、BDB(BerkeleyDB)等
@@ -277,6 +283,10 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 - 持久性 事务一旦提交，则其结果就是永久性的。即使发生宕机的故障，数据库也能将数据恢复。
 
 > SavePoint
+> 
+
+> 如何避免长事务对业务的影响
+> 
 
 ##### 隔离级别和锁
 > 不同的隔离级别对事务的处理能力会有不同程度的影响
@@ -302,25 +312,25 @@ SELECT CHAR(67,72,65,82);  -- CHAR
 
 - READ UNCOMMITTED 完全不加锁
 - SERIALIZABLE 读的时候加共享锁，其他事务可以并发读，但是不能写，写的时候加排他锁，其他事务既不能读也不能写
-- REPEATABLE READ 采用MVCC(Multi Versioning Concurrency Control)方式。一条记录会有多个版本，也就是数据会有多个快照。可重复读会在事务开始的时候生成一个全局数据的当前快照
+- REPEATABLE READ 采用MVCC(Multi Versioning Concurrency Control)方式。一条记录会有多个版本，也就是数据会有多个快照。可重复读会在事务开始「第一条语句执行的时候」的时候生成一个全局数据的当前快照
 - READ COMMITTED 每次执行语句都重新生成一次快照
 
 > 当前读和快照读
 > 
 
-- 当前读 读取的是最新版本，update、delete、insert、select…lock in share mode、select…for update都是锁定读。通过加record lock和gap lock间隙锁来实现，也就是next-key lock。使用next-key lock优势是获取实时数据，但是需要加锁，防止幻读，但是不能彻底解决幻读。
+- 当前读 读取的是最新版本，update、delete、insert、select…lock in share mode、select…for update都是当前读。通过加record lock和gap lock间隙锁来实现，也就是next-key lock。使用next-key lock优势是获取实时数据，但是需要加锁，防止幻读，但是不能彻底解决幻读。
 
   当一个事务t1开始，在另一个事务t2开始执行插入数据column1之后，t1才开始进行操作，那么column1对于t1可见。
 
 - 快照读  基于MVCC 通过undo log存储数据快照
 	- READ COMMITTED 每次SELECT都会生成一个快照读，每个快照都是最新的，所以在当前事务中每次都可以看到其他事务提交的更改。
 	
-	- REPEATABLE READ 开启事务后第一个SELECTt语句才是快照读的地方，而不是一开启事务就快照读，只有当前事务对数据进行更新的时候才会更新快照，在第一次SELECT之前其他事务提交的数据是可以看到的，在SELECT之后其他事务提交的数据在当前事务是看不到的。
+	- REPEATABLE READ 开启事务后第一个SELECT语句才是快照读的地方，而不是一开启事务就快照读，只有当前事务对数据进行更新的时候才会更新快照，在第一次SELECT之前其他事务提交的数据是可以看到的，在SELECT之后其他事务提交的数据在当前事务是看不到的。
 	
 > FOR UPDATE
 > 
 
-`select * from test for update` 可以锁表/锁行。应尽量使用锁行
+`SELECT * FROM test FOR UPDATE;` 可以锁表/锁行。应尽量使用锁行
 
 ```sql
 
@@ -337,16 +347,29 @@ SELECT * FROM test WHERE id LIKE '%3%' FOR UPDATE;
 
 ```
 > 锁
-> 
+>
+> 参考：https://blog.csdn.net/usagoole/article/details/104761617
 
 1. InnoDB 行锁是通过给索引上的索引项加锁来实现的，InnoDB 这种行锁实现特点意味着：只有通过索引条件检索数据，InnoDB 才使用行级锁，否则，InnoDB 将使用表锁！
-2. Mysql 为了满足事务的隔离性，必须在 commit 才释放锁。
-3. 在普通索引列上，不管是何种查询，只要加锁，都会产生间隙锁，这跟唯一索引不一样；
+2. Mysql 为了满足事务的隔离性，在 COMMIT后才释放锁。
+3. 在普通索引列上，不管是何种查询，只要加锁，都会产生间隙锁，和唯一索引不一样。
 4. 在普通索引跟唯一索引中，数据间隙的分析，数据行是优先根据普通索引排序，再根据唯一索引排序。
-5. 间隙锁会封锁该条记录相邻两个键之间的空白区域，防止其它事务在这个区域内插入、修改、删除数据，这是为了防止出现 幻读 现象
+5. 间隙锁会封锁该条记录相邻两个键之间的空白区域，防止其它事务在这个区域内插入、修改、删除数据，这是为了防止出现幻读现象。
 6. 记录锁、间隙锁、临键锁，都属于排它锁
 7. 共享锁就是多个事务对于同一数据可以共享一把锁，都能访问到最新数据。
 8. 根据非唯一索引 对记录行进行 UPDATE \ FOR UPDATE \ LOCK IN SHARE MODE 操作时，InnoDB 会获取该记录行的临键锁 ，并同时获取该记录行下一个区间的间隙锁
+9. MySql只有在RR的隔离级别下才有GAP Lock和Next-Key Lock
+10. 加锁规则
+    - 规则1:加锁的基本单位是Next-Key Lock(前开后闭区间)
+    - 规则2:查找过程中访问到的对象才会加锁，如果查询使用覆盖索引，并不需要访问主键索引，所以主键索引上没有加任何锁；
+    - 优化1:索引上的等值查询，给唯一索引加锁的时候，Next-Key Lock退化为Record Lock（行锁）
+    - 优化2:索引上的等值查询，向右遍历时且最后一个值不满足等值条件的时候，next-key lock退化为Gap Lock（间隙锁）
+11. 默认情况下，InnoDB工作在RR级别下，并且会以Next-Key Lock的方式对数据行进行加锁，这样可以有效防止幻读的发生。
+12. 要分清：表级别的意向共享锁和意向排它锁「意向锁之间是互相兼容的」，表级别的共享锁和排它锁「除了 IS 与 S 兼容外，意向锁会与表级共享锁 /表级排他锁 互斥」，行级别的共享锁和排他锁「意向锁不会与行级的共享 / 排他锁互斥」。
+13. InnoDB 支持`多粒度锁（multiple granularity locking）`，它允许`行级锁`与`表级锁`共存，而**意向锁**就是其中的一种`表锁`。**意向共享锁**（intention shared lock, IS）：事务有意向对表中的某些行加**共享锁**（S锁）；**意向排他锁**（intention exclusive lock, IX）：事务有意向对表中的某些行加**排他锁**（X锁）；`意向锁是有数据引擎自己维护的，用户无法手动操作意向锁`，在为数据行加共享 / 排他锁之前，InooDB 会先获取该数据行所在在数据表的对应意向锁。
+14. 在 InnoDB 事务中，行锁是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。这个就是两阶段锁协议。所以如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。
+15. **死锁** 是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。处理策略：一种是，直接进入等待，直到超时。这个超时时间可以通过参数 innodb_lock_wait_timeout ；另一种是，发起死锁检测，发现死锁后，主动回滚死锁链条中的某一个事务，让其他事务得以继续执行。将参数 innodb_deadlock_detect 设置为 on「默认」，表示开启这个逻辑。InnoDB 引擎采取的是 `wait-for graph` 等待图的方法来自动检测死锁，如果发现死锁会自动回滚一个事务。
+
 
 ##### 索引指南
 
@@ -355,6 +378,8 @@ SELECT * FROM test WHERE id LIKE '%3%' FOR UPDATE;
 N叉树「我习惯叫多叉树」。以 InnoDB 的一个整数字段索引为例，这个 N 差不多是 1200。这棵树高是 4 的时候，就可以存 1200 的 3 次方个值，这已经 17 亿了。考虑到树根的数据块总是在内存中的，一个 10 亿行的表上一个整数字段的索引，查找一个值最多只需要访问 3 次磁盘。其实，树的第二层也有很大概率在内存中，那么访问磁盘的平均次数就更少了。
 
 主键索引的叶子节点存的是整行数据。在 InnoDB 里，主键索引也被称为聚簇索引（clustered index）；非主键索引的叶子节点内容是主键的值。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）
+
+由于每个非主键索引的叶子节点上都是主键的值。如果用身份证号做主键，那么每个二级索引的叶子节点占用约 20 个字节，而如果用整型做主键，则只要 4 个字节，如果是长整型（bigint）则是 8 个字节。**显然，主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小。**所以，从性能和存储空间方面考量，自增主键往往是更合理的选择。
 
 > N的大小可以调整吗？
 > N是由页大小和索引大小决定的
@@ -367,6 +392,13 @@ N叉树「我习惯叫多叉树」。以 InnoDB 的一个整数字段索引为�
 > 索引下推优化
 
 1. 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。
+
+##### 关于Join
+
+> 在决定哪个表做驱动表的时候，应该是两个表按照各自的条件过滤，过滤完成之后，计算参与 join 的各个字段的总数据量，数据量小的那个表，就是“小表”，应该作为驱动表。
+
+1. 如果可以使用被驱动表的索引，join 语句还是有其优势的；不能使用被驱动表的索引，只能使用 Block Nested-Loop Join 算法，可能会因为 join_buffer 不够大，需要对被驱动表做多次全表扫描。这样的语句就尽量不要使用；在使用 join 的时候，应该让小表做驱动表。
+2. Multi-Range Read 优化 (MRR)。这个优化的主要目的是尽量使用顺序读盘。MRR 能够提升性能的核心在于，这条查询语句在索引 a 「普通索引」上做的是一个范围查询（也就是说，这是一个多值查询），可以得到足够多的主键 id。这样通过排序以后，再去主键索引查数据，才能体现出“顺序性”的优势。
 
 ##### 千万级表优化
 
@@ -397,8 +429,7 @@ N叉树「我习惯叫多叉树」。以 InnoDB 的一个整数字段索引为�
    
 
 
-> 一些技巧
-> 
+##### 一些技巧
 
 1. 行转列如何转
 
@@ -406,7 +437,7 @@ N叉树「我习惯叫多叉树」。以 InnoDB 的一个整数字段索引为�
 > 从MySQL小册学习到的
 > 
 
-1. 一条语句的执行流程：
+1. 一条语句的执行流程：连接器--->优化器--->执行器
 2. 关于binlog和redolog：
 3. 回滚记录：实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。
 4. 尽量不要使用长事务：长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间；长事务还占用锁资源，也可能拖垮整个库。

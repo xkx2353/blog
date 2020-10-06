@@ -8,9 +8,8 @@ date: 2020-08-30 13:45:32
 
 
 ##### 好玩的
-```lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
+```latex
+一提到钱，大家就不是那么亲热了。
 ```
 
 

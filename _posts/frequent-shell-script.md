@@ -6,7 +6,7 @@ date: 2020-08-05 13:45:09
 
 tags: [Linux CLI]
 
-categories: [我要学Linux]
+categories: [Linux学习历程]
 
 ---
 

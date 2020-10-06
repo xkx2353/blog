@@ -1,6 +1,6 @@
 ---
 
-title: vim的使用历程
+title: vim使用
 
 date: 2020-08-09 19:45:05
 
