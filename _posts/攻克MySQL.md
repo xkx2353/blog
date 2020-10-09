@@ -400,47 +400,130 @@ N叉树「我习惯叫多叉树」。以 InnoDB 的一个整数字段索引为�
 1. 如果可以使用被驱动表的索引，join 语句还是有其优势的；不能使用被驱动表的索引，只能使用 Block Nested-Loop Join 算法，可能会因为 join_buffer 不够大，需要对被驱动表做多次全表扫描。这样的语句就尽量不要使用；在使用 join 的时候，应该让小表做驱动表。
 2. Multi-Range Read 优化 (MRR)。这个优化的主要目的是尽量使用顺序读盘。MRR 能够提升性能的核心在于，这条查询语句在索引 a 「普通索引」上做的是一个范围查询（也就是说，这是一个多值查询），可以得到足够多的主键 id。这样通过排序以后，再去主键索引查数据，才能体现出“顺序性”的优势。
 
+##### 关于执行计划
+
+> 执行计划的字段意义，优化语句的时候怎么优化
+
+
 ##### 千万级表优化
 
+执行计划很好，但是就是查询很慢，是不是应该强制使用索引呢？
 
-1. 执行计划很好，但是就是查询很慢，是不是应该强制使用索引呢？
+```mysql
+-- 分析是否是取值limit太大，超过count的1/3，Innodb引擎不使用索引
+SELECT *
+FROM database.table
+FORCE index(create_time)
+WHERE create_time >= 1508360400
+  AND create_time <= 1508444806
+ORDER BY create_time ASC
+LIMIT 4000,
+      1000;
+```
 
-   ```sql
-   -- 分析是否是取值limit太大，超过count的1/3，Innodb引擎不使用索引
-   SELECT * FROM `database`.`table` FORCE INDEX(create_time) WHERE create_time >= 1508360400 and create_time <= 1508444806 ORDER BY create_time asc LIMIT 4000, 1000;
-   ```
+相同的sql在不同的从库执行，一个未使用索引，分析是索引文件或者表的碎片导致，是表的碎片问题导致产生的执行计划不正常
 
-2. 相同的sql在不同的从库执行，一个未使用索引，分析是索引文件或者表的碎片导致，是表的碎片问题导致产生的执行计划不正常
+```sql
+-- 方案1：执行OPTIMIZE TABLE修复碎片或者执行ALTER TABLE foo ENGINE=InnoDB，以上两种操作都会锁表，对于数据量大，且业务高峰期执行需要慎重
+-- 方案2：强制索引，也就是FORCE index create_time，强制mysql 引擎使用索引，这里需要注意一下，当使用强制索引时，存储引擎会检查强制索引是否可用，如果不可用，还需要扫描表来判断那种执行计划，
+```
 
-   ```sql
-   -- 方案1：执行OPTIMIZE TABLE修复碎片或者执行ALTER TABLE foo ENGINE=InnoDB，以上两种操作都会锁表，对于数据量大，且业务高峰期执行需要慎重
-   -- 方案2：强制索引，也就是FORCE index create_time，强制mysql 引擎使用索引，这里需要注意一下，当使用强制索引时，存储引擎会检查强制索引是否可用，如果不可用，还需要扫描表来判断那种执行计划，
-   ```
+关于分页优化
 
-3. 关于分页优化
-
-   ```sql
-   -- 日常分页SQL语句,扫描满足条件的10020行，扔掉前面的10000行，返回最后的20行
-   SELECT id,name,content FROM users ORDER BY id ASC LIMIT 100000,20;
-   -- 如果记录了上次的最大ID，扫描20行
-   SELECT id,NAME,content FROM users WHERE id>100073 ORDER BY id ASC LIMIT 20;
-   ```
+```mysql
+-- 日常分页SQL语句,扫描满足条件的10020行，扔掉前面的10000行，返回最后的20行
+SELECT id,name,content FROM users ORDER BY id ASC LIMIT 100000,20;
+-- 如果记录了上次的最大ID，扫描20行
+SELECT id,NAME,content FROM users WHERE id>100073 ORDER BY id ASC LIMIT 20;
+```
 
    
 
 
 ##### 一些技巧
 
-1. 行转列如何转
+-  查询语句的执行顺序：
+from:需要从哪个数据表检索数据 
+where:过滤表中数据的条件 
+group by:如何将上面过滤出的数据分组 
+having:对上面已经分组的数据进行过滤的条件 
+select:查看结果集中的哪个列，或列的计算结果 
+order by :按照什么样的顺序来查看返回的数据 
 
+- 行转列如何转「参考平凡希：https://www.cnblogs.com/xiaoxi/p/7151433.html」
+```mysql
+-- case...when....then
+SELECT userid,
+SUM(CASE `subject` WHEN '语文' THEN score ELSE 0 END) as '语文',
+SUM(CASE `subject` WHEN '数学' THEN score ELSE 0 END) as '数学',
+SUM(CASE `subject` WHEN '英语' THEN score ELSE 0 END) as '英语',
+SUM(CASE `subject` WHEN '政治' THEN score ELSE 0 END) as '政治' 
+FROM tb_score 
+GROUP BY userid
+-- if
+SELECT userid,
+SUM(IF(`subject`='语文',score,0)) as '语文',
+SUM(IF(`subject`='数学',score,0)) as '数学',
+SUM(IF(`subject`='英语',score,0)) as '英语',
+SUM(IF(`subject`='政治',score,0)) as '政治' 
+FROM tb_score 
+GROUP BY userid
+-- 行转列后进行汇总
+SELECT IFNULL(userid,'total') AS userid,
+SUM(IF(`subject`='语文',score,0)) AS 语文,
+SUM(IF(`subject`='数学',score,0)) AS 数学,
+SUM(IF(`subject`='英语',score,0)) AS 英语,
+SUM(IF(`subject`='政治',score,0)) AS 政治,
+SUM(IF(`subject`='total',score,0)) AS total
+FROM(
+    SELECT userid,IFNULL(`subject`,'total') AS `subject`,SUM(score) AS score
+    FROM tb_score
+    GROUP BY userid,`subject`
+    WITH ROLLUP
+    HAVING userid IS NOT NULL
+)AS A 
+GROUP BY userid
+WITH ROLLUP;
+-- way2
+SELECT userid,
+SUM(IF(`subject`='语文',score,0)) AS 语文,
+SUM(IF(`subject`='数学',score,0)) AS 数学,
+SUM(IF(`subject`='英语',score,0)) AS 英语,
+SUM(IF(`subject`='政治',score,0)) AS 政治,
+SUM(score) AS TOTAL 
+FROM tb_score
+GROUP BY userid
+UNION
+SELECT 'TOTAL',SUM(IF(`subject`='语文',score,0)) AS 语文,
+SUM(IF(`subject`='数学',score,0)) AS 数学,
+SUM(IF(`subject`='英语',score,0)) AS 英语,
+SUM(IF(`subject`='政治',score,0)) AS 政治,
+SUM(score) FROM tb_score
+-- way3
+SELECT IFNULL(userid,'TOTAL') AS userid,
+SUM(IF(`subject`='语文',score,0)) AS 语文,
+SUM(IF(`subject`='数学',score,0)) AS 数学,
+SUM(IF(`subject`='英语',score,0)) AS 英语,
+SUM(IF(`subject`='政治',score,0)) AS 政治,
+SUM(score) AS TOTAL 
+FROM tb_score
+GROUP BY userid WITH ROLLUP;
+-- 很好的建属于同一分组的多个行转化为一个列
+SELECT userid,GROUP_CONCAT(`subject`,":",score)AS 成绩 FROM tb_score
+GROUP BY userid
+```
 
 > 从MySQL小册学习到的
 > 
 
-1. 一条语句的执行流程：连接器--->优化器--->执行器
+1. 一条语句的执行流程：「连接器--->查询缓存--->分析器--->优化器--->执行器」（Server层）---->引擎层。Server 层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。
 2. 关于binlog和redolog：
 3. 回滚记录：实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。
 4. 尽量不要使用长事务：长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间；长事务还占用锁资源，也可能拖垮整个库。
+5. InnoDB 是索引组织表，主键索引树的叶子节点是数据，而普通索引树的叶子节点是主键值。所以，普通索引树比主键索引树小很多。对于 count(`*`) 这样的操作，遍历哪个索引树得到的结果逻辑上都是一样的。因此，MySQL 优化器会找到最小的那棵树来遍历。在保证逻辑正确的前提下，尽量减少扫描的数据量，是数据库系统设计的通用法则之一。
+6. 关于排序，如果 MySQL 实在是担心排序内存太小，会影响排序效率，才会采用 rowid 排序算法，这样排序过程中一次可以排序更多行，但是需要再回到原表去取数据。如果 MySQL 认为内存足够大，会优先选择全字段排序，把需要的字段都放到 sort_buffer 中，这样排序后就会直接从内存里面返回查询结果了，不用再回到原表去取数据。这也就体现了 MySQL 的一个设计思想：如果内存够，就要多利用内存，尽量减少磁盘访问。其实，并不是所有的 order by 语句，都需要排序操作的。从上面分析的执行过程，我们可以看到，MySQL 之所以需要生成临时表，并且在临时表上做排序操作，**其原因是原来的数据都是无序的。** 所以可以通过建立联合索引来提高效率「尽可能使用覆盖索引」。
+
+
 
 ##### 好玩的
 
@@ -454,3 +537,11 @@ string.rep('hahaha\t', 10)
 - https://www.tutorialspoint.com/lua/index.htm
 - https://www.zsythink.net/archives/1105
 - [MySQL索引原理及慢查询优化](https://www.mtyun.com/library/mysql-index)
+
+```
+
+```
+
+```
+
+```
