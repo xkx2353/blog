@@ -17,8 +17,6 @@ git push --delete origin v1.0
 
 ```
 
-
-
 ##### git diff 输出的内容的意思
 
 ```
@@ -28,19 +26,10 @@ index 2654564..407cc29 100644
 +++ b/_posts/git.md
 @@ -4,11 +4,14 @@ date: 2020-08-18 09:26:40
  ---
- ##### 终端下的git使用技巧
-
--```
--#reverting 中想终止
-+```latex
-+# reverting 中想终止
- git cherry-pick --abort
- # revert merge commit -m 表示保留的分支
- git revert -m 1 bd86846
-+# git push --delete origin tagname 删除远程的tag
-+git push --delete origin v1.0
-+
-```
+- fdsfsd
+- dfdsf
++ abdc
++ dfdf
 ```
 
 进行比较的是，a版本的/_posts/git.md（即变动前）和b版本的/_posts/git.md（即变动后）。 
@@ -82,5 +71,7 @@ index 2654564..407cc29 100644
 ##### 参考
 - git book
 
+
+```
 
 ```
