@@ -166,6 +166,24 @@ du -sh [目录名] 返回该目录的大小
 du -sm [文件夹] 返回该文件夹总M数
 ```
 
+##### ab的使用
+> ab就是Apache Benchmark的缩写，Apache组织开发的一款web压力测试工具，优点是使用方便，统计功能强大。一些参数分析参考这里：https://www.jianshu.com/p/6175456a55be 当然可以直接 `man ab`
+
+```sh
+#  经Mac下测试使用
+#  -n 总共多少次请求
+#  -c 多少个线程并发请求
+#  -t 测试持续多长时间(second)
+
+# GET 请求
+ab -n 300 -c 30 'http://localhost:8098/test/primary'
+
+# POST 请求
+
+ab -n 100 -c 10 -p post_data.xkx -T 'application/json' 'http://localhost:8098/query'
+
+```
+
 ##### 一些常用的处理文件的脚本
 
 > 从一次面试决定开始记录，提交shell编写能力，想到可以从leecode上面看一些shell题目
