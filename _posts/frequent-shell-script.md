@@ -83,13 +83,35 @@ mvn dependency:analyze >> project.analyze
 > 命令使用详细参考 [这里](https://wangchujiang.com/linux-command/c/ss.html)
 
 ```sh
-# 经Mac下测试使用
+# 说端口的时候要注意是什么协议下的端口
+# 经Mac下测试使用，Linux下执行需要root权限
+# TCP ^LISTEN 可以查看除了LISTEN之外的状态
+# 每个参数的意思建议 man lsof查看
 lsof -nP -iTCP -sTCP:LISTEN
+# UDP
+lsof -nP -iUDP
 # 经Centos下测试使用
 # 显示套接字（socket）使用概况
 ss -s
-# 显示监听状态的tcp套接字（socket）使用概况，显示进程，显示ip
-ss -tlnp
+# 显示监听状态的tcp套接字（socket）使用概况，显示进程，显示ip，同样看进程号也需要root权限
+sudo ss -tlnp
+
+#LISTEN状态下 也就是-l下
+#Recv-Q：当前全连接队列的大小，也就是当前已完成三次握手并等待服务端 accept() 的 TCP 连接；
+#Send-Q：当前全连接最大队列长度，上面的输出结果说明监听 8088 端口的 TCP 服务，最大全连接长度为 128；
+
+# 查看TCP 全连接队列溢出统计
+netstat -s | grep overflowed
+#Linux 有个参数可以指定当 TCP 全连接队列满了会使用什么策略来回应客户端。丢弃连接只是 Linux 的默认行为，我们还可以选择向客户端发送 RST 复位报文，告诉客户端连接已经建立失败。
+cat /proc/sys/net/ipv4/tcp_abort_on_overflow # 默认是0
+# tcp_abort_on_overflow 共有两个值分别是0和1，其分别表示：
+#0 如果全连接队列满了，那么server扔掉client发过来的ack 
+#1 如果全连接队列满了，server发送一个reset包给client，表示废掉这个握手过程和这个连接
+
+
+#非LISTEN状态
+#Recv-Q：已收到但未被应用进程读取的字节数；
+#Send-Q：已发送但未收到确认的字节数
 
 # 显示所有状态为established的SMTP连接
 ss -o state established '( dport = :smtp or sport = :smtp )' 
@@ -169,7 +191,25 @@ du -sm [文件夹] 返回该文件夹总M数
 ##### ab的使用
 > ab就是Apache Benchmark的缩写，Apache组织开发的一款web压力测试工具，优点是使用方便，统计功能强大。一些参数分析参考这里：https://www.jianshu.com/p/6175456a55be 当然可以直接 `man ab`
 
-```sh
+``` sh
+#  经Mac下测试使用
+#  -n 总共多少次请求
+#  -c 多少个线程并发请求
+#  -t 测试持续多长时间(second)
+
+# GET 请求
+ab -n 300 -c 30 'http://localhost:8098/test/primary'
+
+# POST 请求
+
+ab -n 100 -c 10 -p post_data.xkx -T 'application/json' 'http://localhost:8098/query'
+
+```
+
+##### nc的使用
+Netcat(often abbreviated to nc) is a featured networking utility which **reads and writes data across network connections, using the TCP/IP protocol.**It is designed to be a reliable "back-end" tool that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and exploration tool, since it can create almost any kind of connection you would need and has several interesting built-in capabilities
+
+``` sh
 #  经Mac下测试使用
 #  -n 总共多少次请求
 #  -c 多少个线程并发请求
@@ -190,7 +230,8 @@ ab -n 100 -c 10 -p post_data.xkx -T 'application/json' 'http://localhost:8098/qu
 >
 > 另一方面是对于一些简单的命令去使用和理解
 
-###### 文本中出现某些字符频率排名
+###### 
+文本中出现某些字符频率排名
 
 ```sh
  cat num.xkx | sort | uniq -c | sort -nrk 1 | awk -F ' ' '{print $2}' | head -5
