@@ -108,7 +108,6 @@ cat /proc/sys/net/ipv4/tcp_abort_on_overflow # 默认是0
 #0 如果全连接队列满了，那么server扔掉client发过来的ack 
 #1 如果全连接队列满了，server发送一个reset包给client，表示废掉这个握手过程和这个连接
 
-
 #非LISTEN状态
 #Recv-Q：已收到但未被应用进程读取的字节数；
 #Send-Q：已发送但未收到确认的字节数
@@ -223,6 +222,14 @@ ab -n 300 -c 30 'http://localhost:8098/test/primary'
 ab -n 100 -c 10 -p post_data.xkx -T 'application/json' 'http://localhost:8098/query'
 
 ```
+
+
+
+##### 网络相关
+
+> 路由相关：route，traceroute，mtr
+
+
 
 ##### 一些常用的处理文件的脚本
 
