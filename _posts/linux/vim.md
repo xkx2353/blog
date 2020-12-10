@@ -91,6 +91,8 @@ normal命令中的可选参数 ! 用于指示vim在当前命令中不使用任�
 
 The command you want is :e (short for :edit). If you use :edit! it will discard local changes and reload.
 
+Another way  You can actually invoke this prompt using the `:checktime` command.
+
 #### vim中的正则
 The Vim editor uses regular expressions to specify what to search for.
 Regular expressions are an extremely powerful and compact way to specify a search pattern. Unfortunately, this power comes at a price, because regular expressions are a bit tricky to specify.
