@@ -93,6 +93,11 @@ The command you want is :e (short for :edit). If you use :edit! it will discard 
 
 Another way  You can actually invoke this prompt using the `:checktime` command.
 
+> 下划线替换成驼峰 a_b---> aB
+
+`%s/_\(\w\)/\=toupper(submatch(1))/cg`
+
+
 #### vim中的正则
 The Vim editor uses regular expressions to specify what to search for.
 Regular expressions are an extremely powerful and compact way to specify a search pattern. Unfortunately, this power comes at a price, because regular expressions are a bit tricky to specify.
