@@ -97,6 +97,14 @@ Another way  You can actually invoke this prompt using the `:checktime` command.
 
 `%s/_\(\w\)/\=toupper(submatch(1))/cg`
 
+> vim 编辑完成的时候需要root权限保存
+
+`:w !sudo tee %`
+
+> vim 批量操作宏
+
+使用qe开启录制，然后记录操作，再按q录制完毕（注意换行j的位置）
+normal模式下使用@e执行一次，使用10@e执行10次
 
 #### vim中的正则
 The Vim editor uses regular expressions to specify what to search for.
