@@ -20,6 +20,9 @@ categories: [Linux学习历程]
 # 将展示结果的各个参数的header信息也展示出来
 grep -E 'nginx|USER' filename
 egrep 'nginx|USER' filename
+grep --colour=auto -n -H -C  5 'Exception' a.xkx
+# -i 忽视大小写 ignore-case
+grep --colour=auto -i 'exception' a.xkx
 ```
 ##### find相关
 
@@ -31,6 +34,7 @@ find . -name 'nohup.log-2020-07-22*' -exec grep --colour=auto -n -H -C  5 'SF202
 
 ```sh
 #!/bin/bash
+
 #IFS=,
 #numbers="01,02,03,04,05";
 numbers=(01 02 03 04 05);
