@@ -51,12 +51,101 @@ date: 2020-09-04 10:02:13
 7. Redis大key问题
 
    1. 内存占用多、流量大，比如一次取走100K的数据，当QPS为1000时，就会产生100M/s的流量
+
    2. 如果为list,hash等数据结构，大量的elements需要多次遍历，多次系统调用拷贝数据消耗时间
+
    3. 主动删除、被动过期删除、数据迁移等，由于处理这一个KEY时间长，导致服务端发生阻塞
+
    4. 解决方案：对于需要整取value的key,可以尝试将对象分拆成几个key-value， 使用multiGet获取值，这样分拆的意义在于分拆单次操作的压力，将操作压力平摊到多个实例中，降低对单个实例的IO影响；每次需要取部分value的key,同样可以拆成几个key-value，也可以将这些存储在一个hash中，每个field代表具体属性，使用hget，hmget来获取部分value，使用hset，hmset来更新部分属性；
 
-    
+   5. ```bash
+      #命令 每隔 100 条 scan 指令就会休眠 0.1s，ops 就不会剧烈抬升，但是扫描的时间会变长。
+      
+      redis-cli  --bigkeys -i 0.1
+      ```
 
+      
+
+8. redis中调用lua脚本:http://doc.redisfans.com/script/index.html
+
+   ```
+   set name xkx
+   // 通过lua脚本来获取值
+   EVAL "return redis.call('get','name')" 0
+   ```
+
+   EVAL直接对输入的脚本代码体（body）进行求值
+   
+   EVALSHA要求输入某个脚本的 SHA1 校验和， 这个校验和所对应的脚本必须至少被 EVAL 执行过一次
+   
+   EVALSHA 命令的目的就是减少带宽，因为执行过的脚本在服务端会有缓存，可以直接通过传递摘要值进行调用脚本，以此来减少带宽，也可以通过命令来清除缓存`SCRIPT FLUSH`或者判断脚对应的脚本是否在服务端存在`SCRIPT EXISTS`，可以通过`SCRIPT LOAD `将脚本加载到服务端的缓存中，但是并不会执行。
+   
+   可以通过`SCRIPT KILL`杀死当前正在运行的 Lua 脚本，当且仅当这个脚本没有执行过任何写操作时，这个命令才生效；假如当前正在运行的脚本已经执行过写操作，那么即使执行 `SCRIPT KILL`，也无法将它杀死，因为这是违反 Lua 脚本的原子性执行原则的。在这种情况下，唯一可行的办法是使用 `SHUTDOWN NOSAVE` 命令，通过停止整个 Redis 进程来停止脚本的运行，并防止不完整(half-written)的信息被写入数据库中。
+   
+9. showlog
+
+   与其他任意存储系统例如mysql，mongodb可以查看慢日志一样，redis也可以，即通过命令slowlog。
+
+   ```bash
+   #SLOWLOG subcommand [argument]
+   
+   #subcommand主要有：
+   
+   #get，用法：slowlog get [argument]，获取argument参数指定数量的慢日志。
+   #len，用法：slowlog len，总慢日志数量。
+   #reset，用法：slowlog reset，清空慢日志。
+   
+   redis-cli slowlog get 5
+   ```
+
+10. rename-command
+
+   ```bash
+   # 为了防止把问题带到生产环境，我们可以通过配置文件重命名一些危险命令，
+   # 例如keys等一些高危命令。操作非常简单，
+   #只需要在conf配置文件增加如下所示配置即可：
+   
+   rename-command flushdb flushddbb
+   
+   rename-command flushall flushallall
+   
+   rename-command keys keysys
+   ```
+
+   
+
+
+##### 一些常用的命令
+
+- scan	
+
+每次执行都只会返回少量元素， 所以这些命令可以用于生产环境， 而不会出现像 KEYS SMEMBERS命令带来的问题 —— 当 KEYS 命令被用于处理一个大的数据库时， 又或者 SMEMBERS 命令被用于处理一个大的集合键时， 它们可能会阻塞服务器达数秒之久。
+
+以 `0` 作为游标开始一次新的迭代， 一直调用 SCAN 命令， 直到命令返回游标 `0` ， 我们称这个过程为一次**完整遍历**（full iteration）。
+
+```shell
+# 命令的游标参数被设置为 0 时， 服务器将开始一次新的迭代， 而当服务器向用户返回值为 0 的游标时， 表示迭代已结束。
+scan 0
+
+scan 288 MATCH *11*
+
+scan 176 MATCH *11* COUNT 1000
+
+```
+
+下面三个命令的第一个参数总是一个数据库键。
+
+SSCAN命令用于迭代集合键中的元素。
+
+HSCAN命令用于迭代哈希键中的键值对。
+
+ZSCAN命令用于迭代有序集合中的元素
+
+
+
+- type
+
+- [object](http://doc.redisfans.com/key/object.html#object) 命令允许从内部察看给定 `key` 的 Redis 对象
 
 ##### 好玩的
 ```lua
@@ -67,4 +156,5 @@ string.rep('hahaha\t', 10)
 
 ##### 参考
 - https://www.tutorialspoint.com/lua/index.htm
+- http://jinguoxing.github.io/redis/2018/09/04/redis-scan/
 
