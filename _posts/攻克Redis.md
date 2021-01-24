@@ -58,11 +58,13 @@ date: 2020-09-04 10:02:13
 
    4. 解决方案：对于需要整取value的key,可以尝试将对象分拆成几个key-value， 使用multiGet获取值，这样分拆的意义在于分拆单次操作的压力，将操作压力平摊到多个实例中，降低对单个实例的IO影响；每次需要取部分value的key,同样可以拆成几个key-value，也可以将这些存储在一个hash中，每个field代表具体属性，使用hget，hmget来获取部分value，使用hset，hmset来更新部分属性；
 
-   5. ```bash
+   5. 
+   
+   ``` bash
       #命令 每隔 100 条 scan 指令就会休眠 0.1s，ops 就不会剧烈抬升，但是扫描的时间会变长。
       
       redis-cli  --bigkeys -i 0.1
-      ```
+   ```
 
       
 
@@ -72,6 +74,7 @@ date: 2020-09-04 10:02:13
    set name xkx
    // 通过lua脚本来获取值
    EVAL "return redis.call('get','name')" 0
+   
    ```
 
    EVAL直接对输入的脚本代码体（body）进行求值
@@ -100,19 +103,19 @@ date: 2020-09-04 10:02:13
 
 10. rename-command
 
-   ```bash
-   # 为了防止把问题带到生产环境，我们可以通过配置文件重命名一些危险命令，
-   # 例如keys等一些高危命令。操作非常简单，
-   #只需要在conf配置文件增加如下所示配置即可：
-   
-   rename-command flushdb flushddbb
-   
-   rename-command flushall flushallall
-   
-   rename-command keys keysys
-   ```
+  ```bash
+  # 为了防止把问题带到生产环境，我们可以通过配置文件重命名一些危险命令，
+  # 例如keys等一些高危命令。操作非常简单，
+  #只需要在conf配置文件增加如下所示配置即可：
+  
+  rename-command flushdb flushddbb
+  
+  rename-command flushall flushallall
+  
+  rename-command keys keysys
+  ```
 
-   
+  
 
 
 ##### 一些常用的命令
