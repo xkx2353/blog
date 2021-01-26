@@ -86,24 +86,119 @@ a
 
 p
 
-​	print specific lines
+​	print specific lines  
 
 ​	`sed -n '45p' file.txt`  prints only line 45 of the input file
 
+​	`sed '45p' file.txt`  所有行都会被打印出来，45行会被打印两次
+
 ​	`sed -n  '1p ; $p' one.txt two.txt three.txt` 打印one.txt的第一行和three.txt的最后一行
 ​	`sed -n -s  '1p ; $p' one.txt two.txt three.txt` 打印每个文件的第一行和最后一行
-
-s
-
-​	
 
 w
 
 ​	writing output to other files
 
-d
+y/src/dst/
+
+Transliterate any characters in the pattern space which match any of the source-chars with the corresponding character in dest-chars.
+
+l
+
+Print the pattern space in an unambiguous form
+
+
 
 ​	
+### sed模式空间和保留空间
+
+> 通过 sed --debug 查看详细的流程，不要被网上传来传去的博客误导了
+
+sed一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区(pattern space)中的内容，处理完成后，把缓冲区(pattern space)的内容送往屏幕。接着清空缓冲区(pattern space)，处理下一行，这样不断重复，直到文件末尾。
+
+pattern space（模式空间）相当于车间sed把流内容在这里处理；
+hold space（保留空间）相当于仓库，加工的半成品在这里临时储存（当然加工完的成品也在这里存储）。
+
+工作原理：
+
+先读入一行，去掉尾部换行符，存入pattern space，执行编辑命令。
+处理完毕，除非加了-n参数，把现在的pattern space打印出来，在后边打印曾去掉的换行符。
+把pattern space内容给hold space，把pattern space置空。
+接着读下一行，处理下一行。
+
+一种非平凡情况，一个文件仅一行，尾部没换行，sed只打印，不会尾部加换行，但若在尾部又附加了输出，他会再补上那个换行。
+
+通过在pattern space和hold space直接移动数据的一系列命令可以搞出很多花样。
+
+p
+
+​	Print the pattern space.「官网只有这么一句话，通过debug看到是在默认输出之前执行了p命令的输出」
+
+P
+
+​	打印当前模式空间开端至\n的内容，「通过debug看到是在默认输出之前执行了p命令的输出」
+
+n
+
+​	(next) If auto-print is not disabled, print the pattern space, **then, regardless, replace the pattern space with the next line of input**. If there is no more input then `sed` exits without processing any more commands.
+
+N
+
+**Add a newline to the pattern space, then append the next line of input to the pattern space**. If there is no more input then `sed` exits without processing any more commands.
+
+x 
+
+​	交换pattern space和hold space的内容，第一次hold space是空的
+
+d
+
+​	Delete the pattern space; immediately start next cycle.
+
+D
+
+​	If pattern space contains newlines, delete text in the pattern space up to the first newline, and **restart cycle with the resultant pattern space, without reading a new line of input.**
+
+​	If pattern space contains no newline, start a normal new cycle as if the `d` command was issued.
+
+g
+
+Replace the contents of the pattern space with the contents of the hold space.
+
+G
+
+Append a newline to the contents of the pattern space, and then append the contents of the hold space to that of the pattern space.
+
+h
+
+(hold) Replace the contents of the hold space with the contents of the pattern space.
+
+H
+
+Append a newline to the contents of the hold space, and then append the contents of the pattern space to that of the hold space.
+
+###sed跳转
+
+:label 设置一个标记
+b label 主要用来条件分支
+t label 主要用来循环分支
+当然某些情况下两个都可以使用
+
+sed -n ':label s/xkx/kai/p; /xkx/t label' a.xkx
+替换xkx成kai，如果还可以匹配到就跳转到label接着执行替换；
+
+```shell
+printf '%s\n' a1 a2 a3 | sed -E '/1/bx ; s/a/z/ ; :x ; y/123/456/'
+a4
+z5
+z6
+
+printf '%s\n' a1 a2 a3 | sed -E '/1/!s/a/z/ ; y/123/456/'
+a4
+z5
+z6
+```
+
+
 
 
 ### sed常用
@@ -114,9 +209,9 @@ sed引用所有匹配到的字符串
 
 使用 & 符号，如：sed ‘s/a.b/-&-/g’，将 a.b 匹配到的内容替换为 -a.b- 。
 替换中要加入 & 字符，需要在 & 前添加转义字符，如：\&。
-&：引用所有匹配到的字符串
+**&：引用所有匹配到的字符串**
 
-sed -n '/^$/=' filename，打印出匹配的行号
+**sed -n '/^$/=' filename，打印出匹配的行号**
 
 ### sed使用案例
 
@@ -132,6 +227,39 @@ convert understore to camelCase，参考：https://unix.stackexchange.com/questi
 
 `sed -i "$(sed -n '/}/ =' code.xkx | tail -n 1)"' s/}/BY_YOU_END\n&/' code.xkx`
 
+
+
+模式空间和保留空间的使用案例
+
+```bash
+cat a.txt
+1
+2
+3
+4
+#-------
+sed 'N;p' a.xkx
+1
+2
+1
+2
+3
+4
+3
+4%
+#-------
+sed 'N;N;p' a.xkx
+1
+2
+3
+1
+2
+3
+4%
+```
+
+
+
 ### sed好玩的
 
 终端直接执行`sed 's/hello/world/'`
@@ -142,4 +270,4 @@ remaining arguments are names of input files; if no input files are specified, t
 
 ### 参考
 - https://www.gnu.org/software/sed/manual/sed.html#Command_002dLine-Options
-
+- https://blog.noroot.net/archives/297/
