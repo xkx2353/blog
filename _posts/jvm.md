@@ -255,6 +255,8 @@ Survivor区域对象晋升到老年代有两种情况：
 
 ##### 常用的CLI
 
+- 看busy thread 步骤：top -Hp 8 ;printf 0x%x 121; jstack pid | grep 0x88(也就是nid)
+
 - jps 显示指定系统内所有的HotSpot虚拟机进程，`jps -lmv`
 
 - jstat 用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。`jstat -gc 25446`

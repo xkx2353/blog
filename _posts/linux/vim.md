@@ -85,10 +85,26 @@ normal命令中的可选参数 ! 用于指示vim在当前命令中不使用任�
 为了在即便 G 命令已经被设置了映射的条件下也能在vim normal命令中不改变 G 命令原始的含义，需要使用 :normal! G。通过 ! 选项显式指示Vim在当前命令中不使用任何vim映射。
 所以，在任何时候写Vim脚本时，都建议总是使用 normal!，永远不要使用 normal 而给自己埋下不确定性的问题。
 
-
 ```
 
+> [How do I reload the current file?](https://vi.stackexchange.com/questions/444/how-do-i-reload-the-current-file)
 
+The command you want is :e (short for :edit). If you use :edit! it will discard local changes and reload.
+
+Another way  You can actually invoke this prompt using the `:checktime` command.
+
+> 下划线替换成驼峰 a_b---> aB
+
+`%s/_\(\w\)/\=toupper(submatch(1))/cg`
+
+> vim 编辑完成的时候需要root权限保存
+
+`:w !sudo tee %`
+
+> vim 批量操作宏
+
+使用qe开启录制，然后记录操作，再按q录制完毕（注意换行j的位置）
+normal模式下使用@e执行一次，使用10@e执行10次
 
 #### vim中的正则
 The Vim editor uses regular expressions to specify what to search for.
