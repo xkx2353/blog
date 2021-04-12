@@ -253,6 +253,11 @@ Use of "\V" means that after it, only a backslash and terminating character
 
 - 27.\%[]:A sequence of optionally matched atoms. This always matches. It matches as much of the list of atoms it contains as possible.  Thus it stops at the first atom that doesn't match. For example: /r\%[ead] matches "r", "re", "rea" or "read".  The longest that matches is used.
 
+#### 窗口管理
+
+#### 按键映射
+
+
 #### 参考
 - vim help doc
 - https://vimjc.com
