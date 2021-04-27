@@ -26,6 +26,12 @@ date: 2021-01-16 11:33:17
 
 
 
+处理V2rayU需要手动连接的烦恼：
+
+1. AppleScript 重启 application
+2. 通过hammerspoon 提供的api（监听系统的回调），写lua脚本（调用applescript）
+3. 配置同步到dotfiles（最开始是自己的github仓库，现在直接同步到DropBox）换电脑也能快速使用
+
 
 ### 相关介绍
 

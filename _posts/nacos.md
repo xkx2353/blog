@@ -38,8 +38,7 @@ nacos/nacos-server
 
 ##### 好玩的
 ```lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
+快乐固然兴奋，痛苦又何尝不美丽。--[谈生命]
 ```
 ##### 相关介绍
 

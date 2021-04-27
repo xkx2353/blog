@@ -669,8 +669,7 @@ GROUP BY userid
 ##### 好玩的
 
 ```lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
+毕竟西湖六月中，风光不与四时同。--[晓出净慈寺送林子方]
 ```
 ##### 相关介绍
 

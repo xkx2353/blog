@@ -26,8 +26,7 @@ api网关协议上最基本要支持HTTP 和 WebSocket，功能强大点的更�
 
 ##### 好玩的
 ```lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
+千山鸟飞绝，万径人踪灭。--[江雪]
 ```
 ##### 相关介绍
 

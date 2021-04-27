@@ -251,9 +251,7 @@ Supplier回调方式
 ##### 好玩的
 
 ``` lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
-
+关关雎鸠，在河之洲。窈窕淑女，君子好逑。--[关雎]
 ```
 
 

@@ -158,8 +158,7 @@ date: 2020-09-01 16:18:19
 
 ##### 好玩的
 ```lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
+厚道的人 运气都不会太差--[Xiaomi]
 ```
 
 

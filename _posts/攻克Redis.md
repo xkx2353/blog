@@ -152,8 +152,7 @@ ZSCAN命令用于迭代有序集合中的元素
 
 ##### 好玩的
 ```lua
--- 配合各种Escape Sequence
-string.rep('hahaha\t', 10)
+不可结缘--[夏目友人帐]
 ```
 ##### 相关介绍
 
