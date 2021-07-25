@@ -5,7 +5,7 @@ title: 关于git的使用与理解
 date: 2020-08-18 09:26:40
 
 ---
-##### 终端下的git使用技巧
+##### 终端下的git使用
 
 ```latex
 # reverting 中想终止
@@ -16,6 +16,33 @@ git revert -m 1 bd86846
 git push --delete origin v1.0
 
 ```
+##### git reset
+
+```latex
+git reset --soft 仅仅修改HEAD,work tree 和 index 不会变动, 需要重新commit 和 push
+git reset --mixed 修改HEAD,index; work tree 不会变动, 需要重新 add commit 和 push
+git reset --hard HEAD,index; work tree 全部都会变动, 目录中的变化会全部丢失,但是只要是提交到git的都是可以找回的 可以通过:git reflog 找一找
+
+```
+
+##### git update-index  工作树中的文件内容注册到索引
+
+```latex
+
+# 用户承诺该文件不会发生变化,然后暂时不会被git管理
+git update-index --assume-unchanged xkx.txt
+# 恢复上一条命令的修改
+git update-index --no-assume-unchanged xkx.txt
+
+```
+
+##### git merge tool
+
+```latex
+参考: https://www.scootersoftware.com/support.php?zz=kb_vcs_osx
+
+```
+
 
 ##### git diff 输出的内容的意思
 
@@ -53,25 +80,11 @@ index 2654564..407cc29 100644
 +绿色部分表示增加的部分
 
 
-##### git理解
+##### git底层原理
+参考:https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E4%B8%8E%E4%B8%8A%E5%B1%82%E5%91%BD%E4%BB%A4
 
-##### 
-
-
-
-##### git好玩的
-```
-
-```
-
-
+内部如何实现的
 
 
 
 ##### 参考
-- git book
-
-
-```
-
-```
