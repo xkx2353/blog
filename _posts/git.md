@@ -28,7 +28,6 @@ git reset --hard HEAD,index; work tree 全部都会变动, 目录中的变化会
 ##### git update-index  工作树中的文件内容注册到索引
 
 ```latex
-
 # 用户承诺该文件不会发生变化,然后暂时不会被git管理
 git update-index --assume-unchanged xkx.txt
 # 恢复上一条命令的修改
@@ -57,7 +56,7 @@ index 2654564..407cc29 100644
 - dfdsf
 + abdc
 + dfdf
-```
+
 
 进行比较的是，a版本的/_posts/git.md（即变动前）和b版本的/_posts/git.md（即变动后）。 
 
@@ -79,12 +78,15 @@ index 2654564..407cc29 100644
 
 +绿色部分表示增加的部分
 
+```
 
 ##### git底层原理
+```
 参考:https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E4%B8%8E%E4%B8%8A%E5%B1%82%E5%91%BD%E4%BB%A4
 
 内部如何实现的
 
+```
 
 
 ##### 参考
