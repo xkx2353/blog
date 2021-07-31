@@ -27,11 +27,23 @@ git reset --hard HEAD,index; work tree 全部都会变动, 目录中的变化会
 
 ##### git update-index  工作树中的文件内容注册到索引
 
-```latex
+```shell
 # 用户承诺该文件不会发生变化,然后暂时不会被git管理
 git update-index --assume-unchanged xkx.txt
 # 恢复上一条命令的修改
 git update-index --no-assume-unchanged xkx.txt
+
+```
+
+##### git merge
+
+```shell
+# 将本地的远端分支与本地的master 分支进行合并 
+# 例:本地在dev分支,那么就是把本地的master分支合并到本地的dev分支
+git merge origin master
+
+# 例:本地在dev分支,那么就是把远端的master分支合并到本地的dev分支
+git merge origin/master
 
 ```
 
