@@ -106,6 +106,10 @@ Another way  You can actually invoke this prompt using the `:checktime` command.
 使用qe开启录制，然后记录操作，再按q录制完毕（注意换行j的位置）
 normal模式下使用@e执行一次，使用10@e执行10次
 
+> vim 复制
+
+先试用yaw等命令进行复制你想复制的内容(可以放到你习惯的寄存器中),在插入模式下，点击CTRL-R然后输入寄存器的标识符，可以粘贴相应寄存器中的内容到当前位置
+
 #### vim中的正则
 The Vim editor uses regular expressions to specify what to search for.
 Regular expressions are an extremely powerful and compact way to specify a search pattern. Unfortunately, this power comes at a price, because regular expressions are a bit tricky to specify.
