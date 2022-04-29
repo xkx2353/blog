@@ -79,3 +79,21 @@ pyperclip.copy(result.httpie)
 2. curl转到httpie有些参数的兼容性可能还有问题，需要注意
 3. 对于这一套想直接分享给同事使用，还是太麻烦了，对于不熟悉各种脚本的人，安装这，安装那，很容器搞错，所以我决定做个brew包，这样同事只需要执行一个命令即可在自己电脑上面使用（大家使用的都是mac）
 
+------
+
+### brew包做好了
+
+1. 打开你的终端，执行`brew install azouever/tap/curl2httpie`即可
+
+2. 包含两个命令
+
+   1. `curl2httpie.py`
+      1. 复制curl （copy）
+      2. 执行命令
+      3. 粘贴（paste）
+      4. 回车看结果
+   2. `curl_result_json.sh`
+      1. 复制curl （copy）
+      2. 执行命令（看结果）
+
+   
