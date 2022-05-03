@@ -83,7 +83,7 @@ pyperclip.copy(result.httpie)
 
 ### brew包做好了
 
-1. 打开你的终端，执行`brew install azouever/tap/curl2httpie`即可
+1. 打开你的终端，执行 `brew tap azouever/tap;brew install azouever/tap/curl2httpie`即可
 
 2. 包含两个命令
 
