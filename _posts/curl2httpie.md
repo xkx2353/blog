@@ -18,7 +18,7 @@ tags: [curl httpie 效率]
 
 ### curl
 
-> [**curl**]    https://curl.se/ 
+> [curl]:https://curl.se/
 
 1. 对于curl的使用，有很多参数，看看文档还是很不错的，某些场景可能就一个参数就搞定了
 2. 在shell中处理网络请求，对于参数的处理好像node里面的库更适合做这个事情，当然具体我也没有深度使用过
@@ -36,11 +36,11 @@ tags: [curl httpie 效率]
 
 1. Python library to convert curl command to httpie
 
-2. [pip]: https://pypi.org/project/curlipie/
+2. [ pip ]: https://pypi.org/project/curlipie/
 
 ### pyperclip
 
-> [pyperclip]: https://pypi.org/project/pyperclip/
+> [pyperclip]:  https://pypi.org/project/pyperclip/
 
 1. A cross-platform clipboard module for Python. (Only handles plain text for now.)
 
