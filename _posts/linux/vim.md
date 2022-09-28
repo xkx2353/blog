@@ -21,7 +21,7 @@ date: 2020-08-09 19:45:05
 
 ![Rob Pike](https://azou.tech/blog/static/image/RobPikePhoto.png)
 
-**ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976
+**ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976.
 
 vi
 vim
