@@ -17,7 +17,7 @@ date: 2020-08-09 19:45:05
 
 ![ed_is_the_standard_text_editor](https://azou.tech/blog/static/image/ed_is_the_standard_text_editor.png)
 
-![Rob Pike twitter bio](https://azou.tech/blog/static/image/Rob Pike.png)
+![Rob Pike twitter bio](https://azou.tech/blog/static/image/RobPikeTwitter.png)
 
 ![Rob Pike](https://azou.tech/blog/static/image/RobPikePhoto.png)
 
