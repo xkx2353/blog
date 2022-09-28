@@ -15,12 +15,17 @@ date: 2020-08-09 19:45:05
 
 ![bill joy](https://azou.tech/blog/static/image/vi_creator_bill_joy.png)
 
+
+
 ![ed_is_the_standard_text_editor](https://azou.tech/blog/static/image/ed_is_the_standard_text_editor.png)
+
+![Rob Pike twitter bio](https://azou.tech/blog/static/image/Rob\ Pike.png)
+
+![Rob Pike](https://azou.tech/blog/static/image/RobPikePhoto.png)
 
 **ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976
 
 vi
-ex
 vim
 
 #### vim中的不同模式
