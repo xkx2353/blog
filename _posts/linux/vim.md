@@ -28,14 +28,35 @@ date: 2020-08-09 19:45:05
 
 **ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976. **The original Unix editor, distributed with the Bell Labs versions of the operating system in the 1970s, was the rather user-unfriendly ed.** George Coulouris of Queen Mary College, London, which had installed Unix in 1973, developed an improved version called em in 1975 that could take advantage of video terminals. While visiting Berkeley, Coulouris presented his program to **Bill Joy, who modified it to be less demanding on the processor; Joy's version became ex** and got included in the Berkeley Software Distribution.
 
-Vi是Ex行编辑器的可视模式。或者说，Ex是Vi的底层行编辑器
+vi是ex行编辑器的可视模式,ex是vi的底层行编辑器
 
 **ex** was eventually given a full-screen visual interface (adding to its command line oriented operation), thereby becoming the vi text editor. In recent times, ex is implemented as a personality of the vi program; most variants of vi still have an "ex mode", which is invoked using the command ex, or from within vi for one command by typing the : (colon) character. Although there is overlap between ex and vi functionality, some things can only be done with ex commands, so it remains useful when using vi.
 
-#### vim中的不同模式
-vim模式粗略的分为:normal,insert,visual;
+![keyboard_layout](https://azou.tech/blog/static/image/keyboard_layout.png)
 
-细分为:
+**vi** and ex share their code; vi is the ex binary launching with the capability to render the text being edited onto a computer terminal—it is ex's visual mode. **The name vi comes from the abbreviated ex command (vi) to enter the visual mode from within it**. 
+
+------
+
+**vim**
+
+Vim (a contraction of Vi IMproved) is a free and open-source, screen-based text editor program. **It is an improved clone of Bill Joy's vi. Vim's author, Bram Moolenaar, derived Vim from a port of the Stevie editor for Amiga and released a version to the public in 1991.** Vim is designed for use both from a command-line interface and as a standalone application in a graphical user interface. 
+
+**Since its release for the Amiga, cross-platform development has made it available on many other systems**. In 2006, it was voted the most popular editor amongst Linux Journal readers; in 2015 the Stack Overflow developer survey found it to be the third most popular text editor, and in 2019 the fifth most popular development environment.
+
+Stevie, ST Editor for VI Enthusiasts, is a discontinued clone of Bill Joy's vi text editor. Stevie was written by Tim Thompson for the Atari ST in 1987. **It later became the basis for Vim, which was released in 1991.**
+
+Amiga is a family of **personal computers** introduced by Commodore in 1985. 
+
+**vi enhancements**
+
+Some of Vim's enhancements include **completion**, comparison and merging of files (known as **vimdiff**), a comprehensive integrated help system, **extended regular expressions**, **scripting languages** (both native and through alternative scripting interpreters such as Perl, Python, Ruby, Tcl, etc.) including **support for plugins**, a graphical user interface (known as gvim), limited integrated development environment-like features, mouse interaction (both with and without the GUI), **folding**, editing of **compressed or archived files** in gzip, bzip2, zip, and tar format and files over network protocols such as SSH, FTP, and HTTP, **session state preservation**, **spell checking**, **split (horizontal and vertical) and tabbed windows**, Unicode and other multi-language support, **syntax highlighting**, trans-session command, search and cursor position histories, **multiple level and branching undo/redo history** which can persist across editing sessions, and visual mode.
+
+#### vim中的模式
+
+vim常用的:NORMAL,INSERT,VISUAL,VISUAL BLOCK,REPLACE,SELECT,COMMAND_LINE
+
+还是看online doc 吧，:h vim-modes
 
 在vim实用技巧中,觉得有一段话写的特好:`一个画家虽然直接在画布上画画的时间很多,但是他们做的最多的工作研究主题,调整光线,把颜料混合成新的色彩等等.所以说画家在休息的时候不把画笔放在画布上.和画家一样,程序员,也只会花一部分时间来编写代码,绝大部分的时间都是在思考,阅读,以及在代码中穿梭浏览.`仔细揣摩,就会明白不同模式存在的意义.
 
@@ -285,6 +306,7 @@ Use of "\V" means that after it, only a backslash and terminating character
   - https://levelup.gitconnected.com/why-ed-is-the-standard-text-editor-bf45f8f21a3a  上面的英文版
   - https://www.gnu.org/software/ed/manual/ed_manual.html
 - https://ex-vi.sourceforge.net/
+- [Here is why vim uses hjkl keys as arrow keys](https://catonmat.net/why-vim-uses-hjkl-as-arrow-keys)
 - https://vimhelp.org/
 - https://yianwillis.github.io/vimcdoc/doc/help.html
 - https://vimjc.com
