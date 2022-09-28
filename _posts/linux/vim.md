@@ -60,11 +60,91 @@ vim常用的:NORMAL,INSERT,VISUAL,VISUAL BLOCK,REPLACE,SELECT,COMMAND_LINE
 
 在vim实用技巧中,觉得有一段话写的特好:`一个画家虽然直接在画布上画画的时间很多,但是他们做的最多的工作研究主题,调整光线,把颜料混合成新的色彩等等.所以说画家在休息的时候不把画笔放在画布上.和画家一样,程序员,也只会花一部分时间来编写代码,绝大部分的时间都是在思考,阅读,以及在代码中穿梭浏览.`仔细揣摩,就会明白不同模式存在的意义.
 
-#### 单个字符的含义
+#### 必须要会的
 
-vim
+> 某些场景完成一些必须的操作,比如登录服务器做一些事情
 
-- `a:`
+##### 打开移动编辑退出
+
+#### 必备
+
+##### 查文档
+
+`h help`
+
+`h 02.8` `h help-summary`
+
+#### 基本操作
+
+##### 整得高效点
+
+###### 文本选择
+
+> 这个还是挺重要的
+
+`h text-objects`
+
+###### 编辑
+
+###### 移动
+
+###### 删除
+
+###### 批量
+
+重复
+
+##### 工具技能
+
+###### 查找匹配
+
+> 说一下最基本的,其他的需要另外在开一篇,好好讲一讲正则
+
+###### 替换
+
+#### 稍微复杂点
+
+##### 命令行模式
+
+###### 选项
+
+宏操作
+
+> 这个挺好
+
+##### 编辑
+
+###### buffer
+
+swp文件
+
+###### tab
+
+###### window
+
+##### 寄存器
+
+#### 其他功能
+
+##### 配置
+
+> 根据自己的使用习惯，使用一些插件，或者写脚本，vim-script,lua,perl等
+
+##### 映射
+
+折叠
+
+------
+
+# **下面的还没有整理,但是也可以看**
+
+------
+
+
+
+#### Normal模式下常用字符的含义
+
+- `a:append`
 - `b:`
 - `c:`
 - `d:`
@@ -294,10 +374,6 @@ Use of "\V" means that after it, only a backslash and terminating character
 ```
 
 - 27.\%[]:A sequence of optionally matched atoms. This always matches. It matches as much of the list of atoms it contains as possible.  Thus it stops at the first atom that doesn't match. For example: /r\%[ead] matches "r", "re", "rea" or "read".  The longest that matches is used.
-
-#### 窗口管理
-
-#### 按键映射
 
 
 #### 参考
