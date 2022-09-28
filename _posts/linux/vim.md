@@ -6,7 +6,7 @@ date: 2020-08-09 19:45:05
 
 ---
 
-![ADM-3A](https://en.wikipedia.org/wiki/ADM-3A#/media/File:Adm3aimage.jpg)
+![ADM-3A](https://azou.tech/blog/static/image/ADM-3A.png)
 
 #### 思维模式
 
