@@ -6,7 +6,10 @@ date: 2020-08-09 19:45:05
 
 ---
 
+![ADM-3A](https://en.wikipedia.org/wiki/ADM-3A#/media/File:Adm3aimage.jpg)
+
 #### 思维模式
+
 对于大部分(可以说是百分之九十九)人来说,对于文本编辑就是:噼里啪啦输入,中间夹杂着一些删除,最后一个回车,这看着很普通的一系列操作,但是对于经常要文本编辑的工作者来说,可能就不会很好(不是不好,看个人习惯,仅个人看法).需要将这个过程细化,才可以更加高效;我们面对的其实是:单个字符,单个字符串,单个符号(`()`,`{}`,`[]`,`''`,`""`,`<>`)范围内,单行,单个段落,文本开始,文本末尾等的选择,匹配,替换,移动,编辑,复制,删除等操作.只要将思维想明白了,也就对vim没有那么迷惑了.
 #### Unix-like Editor History
 熟悉了计算机文本编辑的历史发展,会对vim有一个更好的理解
@@ -21,10 +24,13 @@ date: 2020-08-09 19:45:05
 
 ![Rob Pike](https://azou.tech/blog/static/image/RobPikePhoto.png)
 
-**ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976.
+`ed--->ex`
 
-vi
-vim
+**ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976. **The original Unix editor, distributed with the Bell Labs versions of the operating system in the 1970s, was the rather user-unfriendly ed.** George Coulouris of Queen Mary College, London, which had installed Unix in 1973, developed an improved version called em in 1975 that could take advantage of video terminals. While visiting Berkeley, Coulouris presented his program to **Bill Joy, who modified it to be less demanding on the processor; Joy's version became ex** and got included in the Berkeley Software Distribution.
+
+Vi是Ex行编辑器的可视模式。或者说，Ex是Vi的底层行编辑器
+
+**ex** was eventually given a full-screen visual interface (adding to its command line oriented operation), thereby becoming the vi text editor. In recent times, ex is implemented as a personality of the vi program; most variants of vi still have an "ex mode", which is invoked using the command ex, or from within vi for one command by typing the : (colon) character. Although there is overlap between ex and vi functionality, some things can only be done with ex commands, so it remains useful when using vi.
 
 #### vim中的不同模式
 vim模式粗略的分为:normal,insert,visual;
@@ -274,10 +280,13 @@ Use of "\V" means that after it, only a backslash and terminating character
 
 
 #### 参考
-- vim help doc
 - ed
   - https://www.chedan.io/posts/ed-is-the-standard-text-editor/
   - https://levelup.gitconnected.com/why-ed-is-the-standard-text-editor-bf45f8f21a3a  上面的英文版
+  - https://www.gnu.org/software/ed/manual/ed_manual.html
+- https://ex-vi.sourceforge.net/
+- https://vimhelp.org/
+- https://yianwillis.github.io/vimcdoc/doc/help.html
 - https://vimjc.com
 - https://vim.fandom.com/wiki/Vim_Tips_Wiki
 - vim 必知必会 [英文版:Practical Vim]
