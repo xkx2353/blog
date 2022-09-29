@@ -12,3 +12,19 @@ date: 2022-09-28 22:13:17
 
 <p>但我心里一直放不下它，<strong><span style="color:#e74c3c">不只是只需要舞动键盘就可以完成所有操作的那种酷炫感</span></strong>，每次修改服务器上的文件，都要先复制到本地，改完后在同步上去的步骤真的很让人崩溃。</p>
 
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td style="text-align:center">姓名</td>
+			<td style="text-align:center">地区</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">xkx</td>
+			<td style="text-align:center">cd</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">jack</td>
+			<td style="text-align:center">bj</td>
+		</tr>
+	</tbody>
+</table>
