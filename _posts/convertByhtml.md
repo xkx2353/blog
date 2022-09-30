@@ -6,25 +6,109 @@ date: 2022-09-28 22:13:17
 
 ---
 
-<p>在我的博客中，Vim 相关的内容只占了总数的 1/10 左右，然后总站的访问量却占到了 1/4 到 1/3 的样子，这些都是统计的 Google 搜索来的访问量，所以我有理由相信在程序员中有相当一批人是喜欢 Vim，并坚持在用 Vim 编辑的。这不禁让我想起当初我学习的痛苦，中文的 Vim 资料其实很少，<strong>我在博客中总结了很多 Vim 的知识，但我还觉的很零散，一种反哺的心态，让我决心好好的梳理下学习 Vim 的过程，让更多的人看到，并开始或者更简单的使用 Vim。</strong></p>
 
-<p>&nbsp; &nbsp; 之所以说我是第 N 次学习，是因为在过去的几年里，我数次想要使用这个装逼神器，但每次都因为太难而却步。无奈 Vim 的学习曲线简直逆天，满屏幕的找光标，每次退出 Vim 都会莫名其妙的报错，然后伴随当、当、当的报警声，想砸键盘有木有。</p>
 
-<p>但我心里一直放不下它，<strong><span style="color:#e74c3c">不只是只需要舞动键盘就可以完成所有操作的那种酷炫感</span></strong>，每次修改服务器上的文件，都要先复制到本地，改完后在同步上去的步骤真的很让人崩溃。</p>
-
-<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
-	<tbody>
-		<tr>
-			<td style="text-align:center">姓名</td>
-			<td style="text-align:center">地区</td>
-		</tr>
-		<tr>
-			<td style="text-align:center">xkx</td>
-			<td style="text-align:center">cd</td>
-		</tr>
-		<tr>
-			<td style="text-align:center">jack</td>
-			<td style="text-align:center">bj</td>
-		</tr>
-	</tbody>
+<h1 style="color: #5e9ca0; text-align: center;">You can edit <span style="color: #2b2301;">this demo</span> text!</h1>
+<h2 style="color: #2e6c80;">How to use the editor:</h2>
+<p><em><span style="color: #ff0000;">Paste your documen</span>ts in the visual editor on the left or your HTML code in the source editor in the right. </em><br />Edit any of the two areas and see the other changing in real time.&nbsp;</p>
+<p>Click the <span style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">Clean</span> button to clean your source code.</p>
+<h2 style="color: #2e6c80;">Some useful features:</h2>
+<ol style="list-style: none; font-size: 14px; line-height: 32px; font-weight: bold;">
+<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/01-interactive-connection.png" alt="interactive connection" width="45" /> Interactive source editor</li>
+<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/02-html-clean.png" alt="html cleaner" width="45" /> HTML Cleaning</li>
+<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/03-docs-to-html.png" alt="Word to html" width="45" /> Word to HTML conversion</li>
+<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/04-replace.png" alt="replace text" width="45" /> Find and Replace</li>
+<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/05-gibberish.png" alt="gibberish" width="45" /> Lorem-Ipsum generator</li>
+<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/6-table-div-html.png" alt="html table div" width="45" /> Table to DIV conversion</li>
+</ol>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<h2 style="color: #2e6c80;">Cleaning options:</h2>
+<table class="editorDemoTable">
+<thead>
+<tr>
+<td>Name of the feature</td>
+<td>Example</td>
+<td>Default</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remove tag attributes</td>
+<td><img style="margin: 1px 15px;" src="images/smiley.png" alt="laughing" width="40" height="16" /> (except <strong>img</strong>-<em>src</em> and <strong>a</strong>-<em>href</em>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Remove inline styles</td>
+<td><span style="color: green; font-size: 13px;">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</span></td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Remove classes and IDs</td>
+<td><span id="demoId">Use classes to <strong class="demoClass">style everything</strong>.</span></td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Remove all tags</td>
+<td>This leaves <strong style="color: blue;">only the plain</strong> <em>text</em>. <img style="margin: 1px;" src="images/smiley.png" alt="laughing" width="16" height="16" /></td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Remove successive &amp;nbsp;s</td>
+<td>Never use non-breaking spaces&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to set margins.</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Remove empty tags</td>
+<td>Empty tags should go!</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Remove tags with one &amp;nbsp;</td>
+<td>This makes&nbsp;no sense!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Remove span tags</td>
+<td>Span tags with <span style="color: green; font-size: 13px;">all styles</span></td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Remove images</td>
+<td>I am an image: <img src="images/smiley.png" alt="laughing" /></td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Remove links</td>
+<td><a href="https://html-online.com" rel="nofollow">This is</a> a link.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Remove tables</td>
+<td>Takes everything out of the table.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Replace table tags with structured divs</td>
+<td>This text is inside a table.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Remove comments</td>
+<td>This is only visible in the source editor <!-- HELLO! --></td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Encode special characters</td>
+<td><span style="color: red; font-size: 17px;">&hearts;</span> <strong style="font-size: 20px;">☺ ★</strong> &gt;&lt;</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td>Set new lines and text indents</td>
+<td>Organize the tags in a nice tree view.</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
 </table>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Save this link into your bookmarks and share it with your friends. It is all FREE! </strong><br /><strong>Enjoy!</strong></p>
+<p><strong>&nbsp;</strong></p>
