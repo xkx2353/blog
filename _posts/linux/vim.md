@@ -4,6 +4,8 @@ title: vim使用
 
 date: 2020-08-09 19:45:05
 
+sticky: 9998
+
 ---
 
 ![ADM-3A](https://azou.tech/blog/static/image/ADM-3A.png)
