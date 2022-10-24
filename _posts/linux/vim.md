@@ -14,7 +14,7 @@ sticky: 9998
 
 对于大部分(可以说是百分之九十九)人来说,对于文本编辑就是:噼里啪啦输入,中间夹杂着一些删除,最后一个回车,这看着很普通的一系列操作,但是对于经常要文本编辑的工作者来说,可能就不会很好(不是不好,看个人习惯,仅个人看法).需要将这个过程细化,才可以更加高效;我们面对的其实是:单个字符,单个字符串,单个符号(`()`,`{}`,`[]`,`''`,`""`,`<>`)范围内,单行,单个段落,文本开始,文本末尾等的选择,匹配,替换,移动,编辑,复制,删除等操作.只要将思维想明白了,也就对vim没有那么迷惑了.
 #### Unix-like Editor History
-熟悉了计算机文本编辑的历史发展,会对vim有一个更好的理解
+> 熟悉了计算机文本编辑的历史发展,会对vim有一个更好的理解
 
 **ed** is a line editor for Unix and Unix-like  operating systems. It was one of the first parts of the Unix operating system that was developed, in August 1969.
 
@@ -104,6 +104,8 @@ vim常用的:NORMAL,INSERT,VISUAL,VISUAL BLOCK,REPLACE,SELECT,COMMAND_LINE
 
 ###### 替换
 
+> substitute
+
 #### 稍微复杂点
 
 ##### 命令行模式
@@ -134,7 +136,7 @@ swp文件
 
 ##### 映射
 
-折叠
+##### 折叠
 
 ------
 
@@ -142,36 +144,34 @@ swp文件
 
 ------
 
+#### 字符的含义
 
-
-#### Normal模式下常用字符的含义
-
-- `a:append`
-- `b:`
-- `c:`
-- `d:`
-- `e:`
-- `f:`
-- `g:` 
-- `h:`
-- `i:`
-- `j:`
-- `k:`
-- `l:`
-- `m:`
-- `n:`
+- `a:append,ascii`
+- `b:backward`
+- `c:change,close`
+- `d:delete`
+- `e:edit,end`
+- `f:find,forward,fold`
+- `g:global,go` 
+- `h:left` 
+- `i:insert,ident`
+- `j:down,join `
+- `k:up`
+- `l:right`
+- `m:mark,mode,motion`
+- `n:repeat search`
 - `o:`
-- `p:`
-- `q:`
-- `r:`
-- `m:`
-- `n:`
-- `u:`
-- `v:`
-- `w:`
-- `x:`
-- `y:`
-- `z:`
+- `p:put,paste`
+- `q:quit`
+- `r:read,repeat,replace`
+- `s:substitute`
+- `t:till,tab,tag`
+- `u:undo`
+- `v:visual`
+- `w:write,window,word`
+- `x:delete`
+- `y:yank`
+- `z:fold`
 #### 几个列表
 - `jumplist`
 - `changelist`
