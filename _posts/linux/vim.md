@@ -72,6 +72,8 @@ vim常用的:NORMAL,INSERT,VISUAL,VISUAL BLOCK,REPLACE,SELECT,COMMAND_LINE
 
 ##### 查文档
 
+> ## Always use the built-in help
+
 `h help`
 
 `h 02.8` `h help-summary`
@@ -137,6 +139,28 @@ swp文件
 ##### 映射
 
 ##### 折叠
+
+#### 无处不在的vim
+
+##### IdeaVim
+
+[Github Repo](https://github.com/JetBrains/ideavim)
+
+> IdeaVim is a Vim engine for JetBrains IDEs.
+>
+> save ourselves a few hand movements and be even more productive
+>
+> 这个插件非常强大
+
+##### Surfingkeys
+
+[Github Repo](https://github.com/brookhong/Surfingkeys)
+
+> Surfingkeys和现有的一些插件一样，让你尽可能的通过键盘来使用Chrome/Firefox浏览器，比如跳转网页，上下左右滚屏。但不只是给vim用户使用
+
+##### 其他
+
+> Vscode, Sublime 等等
 
 ------
 
