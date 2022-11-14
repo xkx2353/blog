@@ -90,7 +90,7 @@ Some of Vim's enhancements include **completion**, comparison and merging of fil
 
 ##### 稍微快点
 
-移动
+###### 移动
 
 移动范围从小到大
 
