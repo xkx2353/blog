@@ -12,13 +12,15 @@ sticky: 9998
 
 #### 思维模式
 
+> Just a text editor, not a IDE
+
 对于大部分(可以说是百分之九十九)人来说,对于文本编辑就是:噼里啪啦输入,中间夹杂着一些删除,最后一个回车,这看着很普通的一系列操作,但是对于经常要文本编辑的工作者来说,可能就不会很好(不是不好,看个人习惯,仅个人看法).需要将这个过程细化,才可以更加高效;我们面对的其实是:单个字符,单个字符串,单个符号(`()`,`{}`,`[]`,`''`,`""`,`<>`)范围内,单行,单个段落,文本开始,文本末尾等的选择,匹配,替换,移动,编辑,复制,删除等操作.只要将思维想明白了,也就对vim没有那么迷惑了.
 #### Unix-like Editor History
 > 熟悉了计算机文本编辑的历史发展,会对vim有一个更好的理解
 
 **ed** is a line editor for Unix and Unix-like  operating systems. It was one of the first parts of the Unix operating system that was developed, in August 1969.
 
-![bill joy](https://azou.tech/blog/static/image/vi_creator_bill_joy.png)
+ed text editor was one of the first three key elements of the Unix operating system—assembler, editor, and shell—developed by Ken Thompson in August 1969 on a PDP-7 at AT&T Bell Labs.
 
 ![ed_is_the_standard_text_editor](https://azou.tech/blog/static/image/ed_is_the_standard_text_editor.png)
 
@@ -28,15 +30,19 @@ sticky: 9998
 
 `ed--->ex`
 
-**ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976. **The original Unix editor, distributed with the Bell Labs versions of the operating system in the 1970s, was the rather user-unfriendly ed.** George Coulouris of Queen Mary College, London, which had installed Unix in 1973, developed an improved version called em in 1975 that could take advantage of video terminals. While visiting Berkeley, Coulouris presented his program to **Bill Joy, who modified it to be less demanding on the processor; Joy's version became ex** and got included in the Berkeley Software Distribution.
+**ex**, short for EXtended,is a line editor for Unix systems originally written by Bill Joy in 1976. **The original Unix editor, distributed with the Bell Labs versions of the operating system in the 1970s, was the rather user-unfriendly ed.** George Coulouris of Queen Mary College, London, which had installed Unix in 1973, developed an improved version called em in 1975 that could take advantage of video terminals. While visiting Berkeley, Coulouris presented his program to **Bill Joy, who modified it to be less demanding on the processor; Joy's version became exand got included in the Berkeley Software Distribution.**
+
+![bill joy](https://azou.tech/blog/static/image/vi_creator_bill_joy.png)
 
 vi是ex行编辑器的可视模式,ex是vi的底层行编辑器
 
-**ex** was eventually given a full-screen visual interface (adding to its command line oriented operation), thereby becoming the vi text editor. In recent times, ex is implemented as a personality of the vi program; most variants of vi still have an "ex mode", which is invoked using the command ex, or from within vi for one command by typing the : (colon) character. Although there is overlap between ex and vi functionality, some things can only be done with ex commands, so it remains useful when using vi.
+**ex** was eventually given a **full-screen visual interface** (adding to its command line oriented operation), thereby becoming the vi text editor. In recent times, ex is implemented as a personality of the vi program; most variants of vi still have an "ex mode", which is invoked using the command ex, or from within vi for one command by typing the : (colon) character. **Although there is overlap between ex and vi functionality, some things can only be done with ex commands, so it remains useful when using vi**.
 
 ![keyboard_layout](https://azou.tech/blog/static/image/keyboard_layout.png)
 
-**vi** and ex share their code; vi is the ex binary launching with the capability to render the text being edited onto a computer terminal—it is ex's visual mode. **The name vi comes from the abbreviated ex command (vi) to enter the visual mode from within it**. 
+Bruce Englar encouraged Joy to redesign the editor, he did June through October 1977 adding a full-screen visual mode to ex—which came to be vi
+
+**vi** and ex share their code; vi is the ex binary launching with the capability to **render the text being edited onto a computer terminal**—it is ex's visual mode. **The name vi comes from the abbreviated ex command (vi) to enter the visual mode from within it**. 
 
 ------
 
@@ -54,21 +60,23 @@ Amiga is a family of **personal computers** introduced by Commodore in 1985.
 
 Some of Vim's enhancements include **completion**, comparison and merging of files (known as **vimdiff**), a comprehensive integrated help system, **extended regular expressions**, **scripting languages** (both native and through alternative scripting interpreters such as Perl, Python, Ruby, Tcl, etc.) including **support for plugins**, a graphical user interface (known as gvim), limited integrated development environment-like features, mouse interaction (both with and without the GUI), **folding**, editing of **compressed or archived files** in gzip, bzip2, zip, and tar format and files over network protocols such as SSH, FTP, and HTTP, **session state preservation**, **spell checking**, **split (horizontal and vertical) and tabbed windows**, Unicode and other multi-language support, **syntax highlighting**, trans-session command, search and cursor position histories, **multiple level and branching undo/redo history** which can persist across editing sessions, and visual mode.
 
-#### vim中的模式
-
-vim常用的:NORMAL,INSERT,VISUAL,VISUAL BLOCK,REPLACE,SELECT,COMMAND_LINE
-
-还是看online doc 吧，:h vim-modes
-
-在vim实用技巧中,觉得有一段话写的特好:`一个画家虽然直接在画布上画画的时间很多,但是他们做的最多的工作研究主题,调整光线,把颜料混合成新的色彩等等.所以说画家在休息的时候不把画笔放在画布上.和画家一样,程序员,也只会花一部分时间来编写代码,绝大部分的时间都是在思考,阅读,以及在代码中穿梭浏览.`仔细揣摩,就会明白不同模式存在的意义.
-
-#### 必须要会的
+#### 必须会
 
 > 某些场景完成一些必须的操作,比如登录服务器做一些事情
 
 ##### 打开移动编辑退出
 
-#### 必备
+------
+
+#### vim中的模式
+
+常用的模式:NORMAL, INSERT,  VISUAL, VISUAL BLOCK, REPLACE, COMMAND_LINE
+
+还是看online doc 吧，:h vim-modes
+
+在vim实用技巧中,有一段话写的特好:**一个画家虽然直接在画布上画画的时间很多,但是他们做的最多的工作研究主题,调整光线,把颜料混合成新的色彩等等.所以说画家在休息的时候不把画笔放在画布上.和画家一样,程序员,也只会花一部分时间来编写代码,绝大部分的时间都是在思考,阅读,以及在代码中穿梭浏览**. 仔细揣摩,就会明白不同模式存在的意义.
+
+#### 必备技能
 
 ##### 查文档
 
@@ -80,19 +88,30 @@ vim常用的:NORMAL,INSERT,VISUAL,VISUAL BLOCK,REPLACE,SELECT,COMMAND_LINE
 
 #### 基本操作
 
-##### 整得高效点
+##### 稍微快点
+
+移动
+
+移动范围从小到大
+
+1. 单行
+2. 跨行
+3. 跨文件
+
+###### 开始编辑
+
+1. 字符前
+2. 字符后
+3. 行开始
+4. 行结尾
+
+###### 删除
 
 ###### 文本选择
 
-> 这个还是挺重要的
+> motion这个还是挺重要的
 
 `h text-objects`
-
-###### 编辑
-
-###### 移动
-
-###### 删除
 
 ###### 批量
 
@@ -403,10 +422,11 @@ Use of "\V" means that after it, only a backslash and terminating character
 
 
 #### 参考
+- https://github.com/mhinz/vi-editor-history
 - ed
+  - https://www.gnu.org/software/ed/
   - https://www.chedan.io/posts/ed-is-the-standard-text-editor/
   - https://levelup.gitconnected.com/why-ed-is-the-standard-text-editor-bf45f8f21a3a  上面的英文版
-  - https://www.gnu.org/software/ed/manual/ed_manual.html
 - https://ex-vi.sourceforge.net/
 - [Here is why vim uses hjkl keys as arrow keys](https://catonmat.net/why-vim-uses-hjkl-as-arrow-keys)
 - https://vimhelp.org/
