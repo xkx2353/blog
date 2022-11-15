@@ -115,7 +115,7 @@ Some of Vim's enhancements include **completion**, comparison and merging of fil
       1. 到屏幕视图头部
       2. 到屏幕视图中间
       3. 到屏幕视图尾部
-   5. 按照屏幕来
+   5. 翻屏
       1. 光标到屏幕的位置
          1. 上方
          2. 中间
@@ -144,17 +144,19 @@ Some of Vim's enhancements include **completion**, comparison and merging of fil
 3. 行开始
 4. 行结尾
 
-###### 删除
-
 ###### 文本选择
 
 > motion这个还是挺重要的
 
 `h text-objects`
 
-###### 批量
+###### 删除
 
-重复
+###### 批量操作
+
+使用visual block 模式
+
+###### 重复操作
 
 ##### 工具技能
 
@@ -168,19 +170,17 @@ Some of Vim's enhancements include **completion**, comparison and merging of fil
 
 #### 稍微复杂点
 
-##### 命令行模式
-
-###### 选项
-
-宏操作
+##### 宏操作
 
 > 这个挺好
+
+##### 命令行模式
+
+> h ex-cmd-index
 
 ##### 编辑
 
 ###### buffer
-
-swp文件
 
 ###### tab
 
@@ -193,6 +193,8 @@ swp文件
 ##### 配置
 
 > 根据自己的使用习惯，使用一些插件，或者写脚本，vim-script,lua,perl等
+>
+> 选项 例 set nu
 
 ##### 映射
 
@@ -472,4 +474,5 @@ Use of "\V" means that after it, only a backslash and terminating character
 - https://yianwillis.github.io/vimcdoc/doc/help.html
 - https://vimjc.com
 - https://vim.fandom.com/wiki/Vim_Tips_Wiki
-- vim 必知必会 [英文版:Practical Vim]
+- https://book.douban.com/subject/25869486/ [英文版:https://www.oreilly.com/library/view/practical-vim-2nd/9781680501629/]
+- https://vimawesome.com/ 
