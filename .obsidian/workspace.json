@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "c2c45fec5762b98d",
+    "type": "split",
+    "children": [
+      {
+        "id": "db8c0173231d701d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0b6d0b9e17b307d7",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ],
+        "stacked": true
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7fd1fbd7db77ab1e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c5da61f3d941ebe7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e3bd6393d99f98f4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "54fdf2243bb4993c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "44309a0d7fde3f70",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "b5ffdfb3cd0d1c09",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 312.5
+  },
+  "right": {
+    "id": "e731949884feaebb",
+    "type": "split",
+    "children": [
+      {
+        "id": "0b8f529d6a732f82",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "26c39ba526531bfa",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a5f8e833a2d3d7f3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6b13cfd8f26e7392",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          },
+          {
+            "id": "3ee6ef99ceebf119",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 301.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "0b6d0b9e17b307d7",
+  "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "工作/工作日志记录/202308/工作日志20230825-Friday.md",
+    "工作/工作日志记录/202308/工作日志20230823-Wednesday.md",
+    "工作/工作日志记录/202308/工作日志20230822-Tuesday.md",
+    "工作/工作日志记录/202308/工作日志20230821-Monday.md",
+    "README_EXAMPLE.md",
+    "README.md",
+    "hypothesis/v2ex.com/怎么会有 CloudFlare 这么良心的厂商 - V2EX.md",
+    "hypothesis/v2ex.com",
+    "hypothesis/lawrenceli.me/CloudFlare.md",
+    "hypothesis/lawrenceli.me",
+    "工作/工作日志记录/202308/工作日志20230814-Monday.md",
+    "工作/工作日志记录/202308/工作日志20230819-Saturday.md",
+    "工作/工作日志记录/202308/工作日志20230820-Sunday.md",
+    "工作/工作日志记录/202308/工作日志20230818-Friday.md",
+    "工作/工作日志记录/202308/工作日志20230817-Thursday.md",
+    "工作/工作日志记录/日常工作日志模板.md",
+    "工作/工作日志记录/202308/工作日志20230816-Wednesday.md",
+    "工作/工作日志记录/202308/工作日志20230815-Tuesday.md",
+    "网络/扶手/justmysocks.md",
+    "工作/晋升/PPT思路.md",
+    "工作/工作日志记录/202308/工作日志20230811-Friday.md",
+    "工作/工作日志记录/202308/工作日志20230803.md",
+    "工作/工作日志记录/202308/工作日志20230802.md",
+    "工作/工作日志记录/202308/工作日志20230801.md",
+    "工作/工作日志记录/202308/工作日志20230810-Thursday.md",
+    "工作/工作日志记录/202308/工作日志20230809-Wednesday.md",
+    "工作/工作日志记录/202308/工作日志20230809.md",
+    "handle_conflict.sh~",
+    "handle_conflict.sh",
+    "handle_conlict.sh",
+    "工具",
+    "Excalidraw/一些技术",
+    "文件模板",
+    "生活",
+    "工作/复盘/AiAPP项目复盘 (conflict 2023-08-16-21-58-09).html",
+    "gif/copilot_complete_mapper.gif",
+    "gif/copilot_complete_code.gif",
+    "image/a752d422-9c42-4064-8789-cb1e7a978c5d.jpg",
+    "image/why_use_this_background_color.png",
+    "image/waitlist.png",
+    "image/qrcode_prompt_help.openai.com.png",
+    "image/qrcode_mirror_chatgpt_cc.ai55.cc.png",
+    "image/qrcode_midjourney_www.creativindie.com.png",
+    "image/prompt_midjourney.png",
+    "image/openai-translator.png",
+    "Cavas/github_doc.canvas",
+    "obsidian/Cavas/github_doc.canvas",
+    "Untitled.canvas"
+  ]
+}

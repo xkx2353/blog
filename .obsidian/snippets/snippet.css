@@ -1,0 +1,22 @@
+body {
+  --file-line-width: 1000px
+}
+.markdown-source-view.is-readable-line-width .CodeMirror,
+.markdown-preview-view.is-readable-line-width .CodeMirror,
+.markdown-source-view.is-readable-line-width .markdown-preview-sizer,
+.markdown-preview-view.is-readable-line-width .markdown-preview-sizer {
+  max-width: 1000px;
+  margin: auto;
+}
+.inline-title {
+    text-align: center;
+}
+img[alt*="center"] {
+		display: block !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+}
+
+ .markdown-source-view.mod-cm6 .cm-content > * {
+		margin: auto auto !important;
+}
