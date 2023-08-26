@@ -1,7 +1,7 @@
 ---
-title: 标题
+title: <% tp.file.title %>
 
-date: {{date}}
+date: <% tp.file.creation_date() %>
 
 tags: 
 ---

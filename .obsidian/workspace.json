@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "c9292b9696d4fc1f",
+        "id": "0992bd7d8e62b6be",
         "type": "tabs",
         "children": [
           {
-            "id": "c948633d1cd51053",
+            "id": "745d84a994ef3b39",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -148,11 +148,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e3bd6393d99f98f4",
+  "active": "745d84a994ef3b39",
   "lastOpenFiles": [
-    "Untitled.md",
-    "_posts/new_blog/Untitled.md",
+    "_posts/新博文.md",
     "_templates/new blog.md",
+    "_posts/obsidian/新博文.md",
+    "Untitled.md",
+    "_posts/obsidian/Untitled.md",
+    "_posts/new_blog/Untitled.md",
     "_posts/unit_test.md",
     "_posts/new_blog",
     "_posts/article_template.md",
@@ -178,9 +181,6 @@
     "工作/工作日志记录/202308/工作日志20230816-Wednesday.md",
     "工作/工作日志记录/202308/工作日志20230815-Tuesday.md",
     "网络/扶手/justmysocks.md",
-    "工作/晋升/PPT思路.md",
-    "工作/工作日志记录/202308/工作日志20230811-Friday.md",
-    "工作/工作日志记录/202308/工作日志20230803.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",
