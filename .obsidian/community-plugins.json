@@ -6,5 +6,6 @@
   "obsidian-image-auto-upload-plugin",
   "obsidian-hypothesis-plugin",
   "quickadd",
-  "templater-obsidian"
+  "templater-obsidian",
+  "obsidian-shellcommands"
 ]
