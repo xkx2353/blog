@@ -1,7 +1,7 @@
 ---
-title: new blog
+title: {{title}}
 
-date: 2023-08-26 20:32:29
+date: {{date}}
 
-tags: [模板]
+tags: 
 ---

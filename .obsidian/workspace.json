@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "64a9e41e23f6dee9",
+        "id": "c41f38e8962363a8",
         "type": "tabs",
         "children": [
           {
-            "id": "16f92ba4c4acf7e4",
+            "id": "2d46c11bdb3b5dea",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -149,11 +149,12 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "16f92ba4c4acf7e4",
+  "active": "e3bd6393d99f98f4",
   "lastOpenFiles": [
+    "_posts/new_blog",
+    "templates/new blog.md",
     "Untitled.md",
     "_posts/article_template.md",
-    "templates/new blog.md",
     "_posts/obsidian",
     "templates",
     "conflict-files-obsidian-git.md",
@@ -180,7 +181,6 @@
     "工作/工作日志记录/202308/工作日志20230811-Friday.md",
     "工作/工作日志记录/202308/工作日志20230803.md",
     "工作/工作日志记录/202308/工作日志20230802.md",
-    "工作/工作日志记录/202308/工作日志20230801.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",

@@ -9,7 +9,9 @@
   "alwaysUpdateLinks": true,
   "showLineNumber": false,
   "vimMode": true,
-  "promptDelete": false,
+  "promptDelete": true,
   "spellcheck": false,
-  "readableLineLength": true
+  "readableLineLength": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "_posts/new_blog"
 }
