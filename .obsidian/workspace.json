@@ -11,8 +11,12 @@
             "id": "0b6d0b9e17b307d7",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "templates/new blog.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "templates/new blog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "templates/new blog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +133,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "templates/new blog.md"
+              }
             }
           }
         ],
@@ -145,11 +153,15 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "omnisearch:Omnisearch": false
     }
   },
   "active": "0b6d0b9e17b307d7",
   "lastOpenFiles": [
+    "_posts/article_template.md",
+    "templates/new blog.md",
+    "templates",
     "conflict-files-obsidian-git.md",
     "工作/工作日志记录/202308/工作日志20230825-Friday.md",
     "工作/工作日志记录/202308/工作日志20230823-Wednesday.md",
@@ -176,8 +188,6 @@
     "工作/工作日志记录/202308/工作日志20230802.md",
     "工作/工作日志记录/202308/工作日志20230801.md",
     "工作/工作日志记录/202308/工作日志20230810-Thursday.md",
-    "工作/工作日志记录/202308/工作日志20230809-Wednesday.md",
-    "工作/工作日志记录/202308/工作日志20230809.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",
@@ -185,7 +195,6 @@
     "Excalidraw/一些技术",
     "文件模板",
     "生活",
-    "工作/复盘/AiAPP项目复盘 (conflict 2023-08-16-21-58-09).html",
     "gif/copilot_complete_mapper.gif",
     "gif/copilot_complete_code.gif",
     "image/a752d422-9c42-4064-8789-cb1e7a978c5d.jpg",
