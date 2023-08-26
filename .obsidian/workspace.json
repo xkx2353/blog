@@ -8,11 +8,15 @@
         "type": "tabs",
         "children": [
           {
-            "id": "745d84a994ef3b39",
+            "id": "90a4ae03d2489901",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
@@ -74,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 312.5
+    "width": 312.5,
+    "collapsed": true
   },
   "right": {
     "id": "e731949884feaebb",
@@ -90,6 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/obsidian/如何在obsidian写博客.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,6 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/obsidian/如何在obsidian写博客.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +134,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/obsidian/如何在obsidian写博客.md"
+              }
             }
           }
         ],
@@ -148,8 +157,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "745d84a994ef3b39",
+  "active": "90a4ae03d2489901",
   "lastOpenFiles": [
+    "_posts/obsidian/如何在obsidian写博客.md",
     "_posts/新博文.md",
     "_templates/new blog.md",
     "_posts/obsidian/新博文.md",
@@ -180,7 +190,6 @@
     "工作/工作日志记录/日常工作日志模板.md",
     "工作/工作日志记录/202308/工作日志20230816-Wednesday.md",
     "工作/工作日志记录/202308/工作日志20230815-Tuesday.md",
-    "网络/扶手/justmysocks.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",
