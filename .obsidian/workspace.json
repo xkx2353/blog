@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "0992bd7d8e62b6be",
+        "id": "968c716f69cb504b",
         "type": "tabs",
         "children": [
           {
-            "id": "90a4ae03d2489901",
+            "id": "748f3b1fab15d6a2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "file": "_posts/tmp/临时记录.md",
                 "mode": "source",
                 "source": false
               }
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 312.5,
-    "collapsed": true
+    "width": 312.5
   },
   "right": {
     "id": "e731949884feaebb",
@@ -95,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "file": "_posts/tmp/临时记录.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "file": "_posts/tmp/临时记录.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md"
+                "file": "_posts/tmp/临时记录.md"
               }
             }
           }
@@ -157,8 +156,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "90a4ae03d2489901",
+  "active": "748f3b1fab15d6a2",
   "lastOpenFiles": [
+    "_posts/linux/vim.md",
     "_posts/obsidian/如何在obsidian写博客.md",
     "_posts/新博文.md",
     "_templates/new blog.md",
@@ -189,7 +189,6 @@
     "工作/工作日志记录/202308/工作日志20230817-Thursday.md",
     "工作/工作日志记录/日常工作日志模板.md",
     "工作/工作日志记录/202308/工作日志20230816-Wednesday.md",
-    "工作/工作日志记录/202308/工作日志20230815-Tuesday.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",
