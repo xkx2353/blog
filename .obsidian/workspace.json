@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/tmp/临时记录.md",
+                "file": "_posts/obsidian/如何在obsidian写博客.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/tmp/临时记录.md",
+                "file": "_posts/obsidian/如何在obsidian写博客.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/tmp/临时记录.md",
+                "file": "_posts/obsidian/如何在obsidian写博客.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/tmp/临时记录.md"
+                "file": "_posts/obsidian/如何在obsidian写博客.md"
               }
             }
           }
@@ -158,6 +158,7 @@
   },
   "active": "748f3b1fab15d6a2",
   "lastOpenFiles": [
+    "_posts/tmp/临时记录.md",
     "_posts/linux/vim.md",
     "_posts/obsidian/如何在obsidian写博客.md",
     "_posts/新博文.md",
@@ -188,7 +189,6 @@
     "工作/工作日志记录/202308/工作日志20230818-Friday.md",
     "工作/工作日志记录/202308/工作日志20230817-Thursday.md",
     "工作/工作日志记录/日常工作日志模板.md",
-    "工作/工作日志记录/202308/工作日志20230816-Wednesday.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",
