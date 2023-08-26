@@ -12,6 +12,6 @@
   "promptDelete": true,
   "spellcheck": false,
   "readableLineLength": true,
-  "newFileLocation": "folder",
+  "newFileLocation": "root",
   "newFileFolderPath": "_posts/new_blog"
 }
