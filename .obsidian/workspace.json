@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "fabab87adae42265",
+        "id": "c9292b9696d4fc1f",
         "type": "tabs",
         "children": [
           {
-            "id": "624eb6415adfe3cf",
+            "id": "c948633d1cd51053",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -144,16 +144,17 @@
       "graph:Open graph view": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "omnisearch:Omnisearch": false
+      "omnisearch:Omnisearch": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "624eb6415adfe3cf",
+  "active": "e3bd6393d99f98f4",
   "lastOpenFiles": [
+    "Untitled.md",
     "_posts/new_blog/Untitled.md",
     "_templates/new blog.md",
     "_posts/unit_test.md",
     "_posts/new_blog",
-    "Untitled.md",
     "_posts/article_template.md",
     "_posts/obsidian",
     "_templates",
