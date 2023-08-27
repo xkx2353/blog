@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "968c716f69cb504b",
+        "id": "eb28306b0e98ce9b",
         "type": "tabs",
         "children": [
           {
-            "id": "748f3b1fab15d6a2",
+            "id": "e647ab1ea047668a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "file": "Untitled.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "file": "Untitled.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md",
+                "file": "Untitled.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/obsidian/如何在obsidian写博客.md"
+                "file": "Untitled.md"
               }
             }
           }
@@ -156,11 +156,25 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "748f3b1fab15d6a2",
+  "active": "e3bd6393d99f98f4",
   "lastOpenFiles": [
+    "_posts/总线技术.md",
+    "_posts/基础算法.md",
+    "_posts/在线协同工具.md",
+    "_posts/写好代码.md",
+    "_posts/validation.md",
+    "_posts/UML中类之间的关系.md",
+    "_posts/nginx.md",
+    "_posts/mq.md",
+    "_posts/my_work_tool_flow.md",
+    "_posts/jvm.md",
+    "_posts/java核心.md",
+    "_posts/git.md",
+    "_posts/effective/提高效率之Mac.md",
+    "_posts/about/index.md",
+    "_posts/obsidian/如何在obsidian写博客.md",
     "_posts/tmp/临时记录.md",
     "_posts/linux/vim.md",
-    "_posts/obsidian/如何在obsidian写博客.md",
     "_posts/新博文.md",
     "_templates/new blog.md",
     "_posts/obsidian/新博文.md",
@@ -173,22 +187,8 @@
     "_posts/obsidian",
     "_templates",
     "conflict-files-obsidian-git.md",
-    "工作/工作日志记录/202308/工作日志20230825-Friday.md",
-    "工作/工作日志记录/202308/工作日志20230823-Wednesday.md",
-    "工作/工作日志记录/202308/工作日志20230822-Tuesday.md",
-    "工作/工作日志记录/202308/工作日志20230821-Monday.md",
-    "README_EXAMPLE.md",
-    "README.md",
-    "hypothesis/v2ex.com/怎么会有 CloudFlare 这么良心的厂商 - V2EX.md",
     "hypothesis/v2ex.com",
-    "hypothesis/lawrenceli.me/CloudFlare.md",
     "hypothesis/lawrenceli.me",
-    "工作/工作日志记录/202308/工作日志20230814-Monday.md",
-    "工作/工作日志记录/202308/工作日志20230819-Saturday.md",
-    "工作/工作日志记录/202308/工作日志20230820-Sunday.md",
-    "工作/工作日志记录/202308/工作日志20230818-Friday.md",
-    "工作/工作日志记录/202308/工作日志20230817-Thursday.md",
-    "工作/工作日志记录/日常工作日志模板.md",
     "handle_conflict.sh~",
     "handle_conflict.sh",
     "handle_conlict.sh",
