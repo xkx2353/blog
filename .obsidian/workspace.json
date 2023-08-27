@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "eb28306b0e98ce9b",
+        "id": "fcb85a55b0a792ec",
         "type": "tabs",
         "children": [
           {
-            "id": "e647ab1ea047668a",
+            "id": "4a1a31feeb4e62ae",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Untitled.md",
+                "file": "_posts/项目使用docker过程.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Untitled.md",
+                "file": "_posts/项目使用docker过程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Untitled.md",
+                "file": "_posts/项目使用docker过程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Untitled.md"
+                "file": "_posts/项目使用docker过程.md"
               }
             }
           }
@@ -156,9 +156,23 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e3bd6393d99f98f4",
+  "active": "4a1a31feeb4e62ae",
   "lastOpenFiles": [
+    "_posts/进程管理.md",
+    "_posts/输入输出管理.md",
+    "_posts/计算机基础知识.md",
+    "_posts/dubbo.md",
+    "_posts/docker使用.md",
+    "_posts/ddd.md",
+    "_posts/framework/spring.md",
+    "_posts/life/christmas.md",
+    "_posts/life/争斗.md",
+    "_posts/life/喜欢的歌词.md",
+    "_posts/life/我所喜欢的NBA.md",
+    "_posts/life/绿瓶子和黄叶子.md",
+    "_posts/life/河西走廊.md",
     "_posts/总线技术.md",
+    "Untitled.md",
     "_posts/基础算法.md",
     "_posts/在线协同工具.md",
     "_posts/写好代码.md",
@@ -170,23 +184,9 @@
     "_posts/jvm.md",
     "_posts/java核心.md",
     "_posts/git.md",
-    "_posts/effective/提高效率之Mac.md",
-    "_posts/about/index.md",
-    "_posts/obsidian/如何在obsidian写博客.md",
-    "_posts/tmp/临时记录.md",
-    "_posts/linux/vim.md",
-    "_posts/新博文.md",
-    "_templates/new blog.md",
-    "_posts/obsidian/新博文.md",
-    "Untitled.md",
-    "_posts/obsidian/Untitled.md",
-    "_posts/new_blog/Untitled.md",
-    "_posts/unit_test.md",
     "_posts/new_blog",
-    "_posts/article_template.md",
     "_posts/obsidian",
     "_templates",
-    "conflict-files-obsidian-git.md",
     "hypothesis/v2ex.com",
     "hypothesis/lawrenceli.me",
     "handle_conflict.sh~",

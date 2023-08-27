@@ -294,9 +294,6 @@ public class AsyncServiceImpl implements AsyncService {
 > 
 
 
-
-
-
 ##### 好玩的
 
 ```lua
@@ -304,8 +301,6 @@ public class AsyncServiceImpl implements AsyncService {
 string.rep('hahaha\t', 10)
 ```
 ##### 相关介绍
-
-
 
 
 ##### 参考
