@@ -11,8 +11,12 @@
             "id": "5516149109c201f9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/tmp/临时记录.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/tmp/临时记录.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/tmp/临时记录.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +133,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/tmp/临时记录.md"
+              }
             }
           }
         ],
@@ -150,9 +158,11 @@
   },
   "active": "5516149109c201f9",
   "lastOpenFiles": [
+    "_posts/new_blog/如何在obsidian写博客.md",
+    "_posts/article_template.md",
+    "_posts/tmp/临时记录.md",
     "新博文.md",
     "_posts/obsidian/Untitled",
-    "_posts/new_blog/如何在obsidian写博客.md",
     "_posts/项目使用docker过程.md",
     "_templates/new blog.md",
     "Untitled.md",
@@ -175,7 +185,6 @@
     "_posts/写好代码.md",
     "_posts/validation.md",
     "_posts/UML中类之间的关系.md",
-    "_posts/nginx.md",
     "_posts/new_blog",
     "_posts/new_blog",
     "_templates",
