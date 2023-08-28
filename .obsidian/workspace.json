@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "8cf54ea0cfd9b22e",
+        "id": "fcb85a55b0a792ec",
         "type": "tabs",
         "children": [
           {
-            "id": "5516149109c201f9",
+            "id": "4a1a31feeb4e62ae",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/tmp/临时记录.md",
+                "file": "_posts/项目使用docker过程.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/tmp/临时记录.md",
+                "file": "_posts/项目使用docker过程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/tmp/临时记录.md",
+                "file": "_posts/项目使用docker过程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/tmp/临时记录.md"
+                "file": "_posts/项目使用docker过程.md"
               }
             }
           }
@@ -156,16 +156,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "5516149109c201f9",
+  "active": "e3bd6393d99f98f4",
   "lastOpenFiles": [
     "_posts/new_blog/如何在obsidian写博客.md",
-    "_posts/article_template.md",
-    "_posts/tmp/临时记录.md",
-    "新博文.md",
-    "_posts/obsidian/Untitled",
-    "_posts/项目使用docker过程.md",
-    "_templates/new blog.md",
-    "Untitled.md",
+    "_posts/new_blog",
     "_posts/进程管理.md",
     "_posts/输入输出管理.md",
     "_posts/计算机基础知识.md",
@@ -180,13 +174,18 @@
     "_posts/life/绿瓶子和黄叶子.md",
     "_posts/life/河西走廊.md",
     "_posts/总线技术.md",
+    "Untitled.md",
     "_posts/基础算法.md",
     "_posts/在线协同工具.md",
     "_posts/写好代码.md",
     "_posts/validation.md",
     "_posts/UML中类之间的关系.md",
-    "_posts/new_blog",
-    "_posts/new_blog",
+    "_posts/nginx.md",
+    "_posts/mq.md",
+    "_posts/my_work_tool_flow.md",
+    "_posts/jvm.md",
+    "_posts/java核心.md",
+    "_posts/obsidian",
     "_templates",
     "hypothesis/v2ex.com",
     "hypothesis/lawrenceli.me",
@@ -194,6 +193,7 @@
     "handle_conflict.sh",
     "handle_conlict.sh",
     "工具",
+    "Excalidraw/一些技术",
     "gif/copilot_complete_mapper.gif",
     "gif/copilot_complete_code.gif",
     "image/a752d422-9c42-4064-8789-cb1e7a978c5d.jpg",
