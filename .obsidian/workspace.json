@@ -144,8 +144,7 @@
       "graph:Open graph view": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "omnisearch:Omnisearch": false,
-      "templater-obsidian:Templater": false
+      "omnisearch:Omnisearch": false
     }
   },
   "active": "e3bd6393d99f98f4",
