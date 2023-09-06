@@ -14,19 +14,8 @@
               "type": "empty",
               "state": {}
             }
-          },
-          {
-            "id": "4ec37ba6b5484411",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.4.5"
-              }
-            }
           }
         ],
-        "currentTab": 1,
         "stacked": true
       }
     ],
@@ -159,7 +148,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "4ec37ba6b5484411",
+  "active": "2b96345be2ec58e1",
   "lastOpenFiles": [
     "images/adaptor_module_name_different.png",
     "images/ADM-3A.png",
