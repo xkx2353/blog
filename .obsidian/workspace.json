@@ -14,8 +14,19 @@
               "type": "empty",
               "state": {}
             }
+          },
+          {
+            "id": "a10b7a22a7a9b588",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.4.5"
+              }
+            }
           }
         ],
+        "currentTab": 1,
         "stacked": true
       }
     ],
@@ -147,7 +158,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e3bd6393d99f98f4",
+  "active": "a10b7a22a7a9b588",
   "lastOpenFiles": [
     "images/avatar.jpg",
     "_templates/new blog.md",
