@@ -11,8 +11,12 @@
             "id": "5516149109c201f9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/life/喜欢的歌词.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/life/喜欢的歌词.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/life/喜欢的歌词.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +133,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/life/喜欢的歌词.md"
+              }
             }
           },
           {
@@ -159,6 +167,7 @@
   },
   "active": "5516149109c201f9",
   "lastOpenFiles": [
+    "_posts/life/争斗.md",
     "images/avatar.jpg",
     "_templates/new blog.md",
     "_templates",
@@ -173,7 +182,6 @@
     "images/no_comment_02.png",
     "images/no_comment.png",
     "images/nginx-logo.png",
-    "images/mysql_date_datetime_timestamp.png",
     "images/Westlife_Hello_My_Love.mp3",
     "images/Enya_WeWishYouaMerryChristmas.mp3",
     "images",
@@ -193,7 +201,6 @@
     "_posts/life/河西走廊.md",
     "_posts/life/我所喜欢的NBA.md",
     "_posts/life/喜欢的歌词.md",
-    "_posts/life/争斗.md",
     "_posts/life/christmas.md",
     "_posts/framework/spring_webmvc.md",
     "_posts/framework/spring_web.md",
