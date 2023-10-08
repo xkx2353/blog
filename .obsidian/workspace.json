@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/life/2023国庆.md",
+                "file": "_posts/life/新博文.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/life/2023国庆.md",
+                "file": "_posts/life/新博文.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/life/2023国庆.md",
+                "file": "_posts/life/新博文.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/life/2023国庆.md"
+                "file": "_posts/life/新博文.md"
               }
             }
           },
@@ -162,15 +162,17 @@
       "graph:Open graph view": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "omnisearch:Omnisearch": false
+      "omnisearch:Omnisearch": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "5516149109c201f9",
+  "active": "e3bd6393d99f98f4",
   "lastOpenFiles": [
+    "_posts/life/2023国庆.md",
+    "_posts/life/新博文.md",
     "_posts/new_blog/如何在obsidian写博客.md",
     "_posts/new_blog",
     "_posts/life/喜欢的歌词.md",
-    "_posts/life/2023国庆.md",
     "_posts/life/争斗.md",
     "images/avatar.jpg",
     "_templates/new blog.md",
@@ -208,7 +210,6 @@
     "_posts/framework/spring_webmvc.md",
     "_posts/framework/spring_web.md",
     "_posts/framework/spring.md",
-    "_posts/effective/提高效率之Mac.md",
     "_posts/zou",
     "_posts/tmp",
     "_posts/network",
