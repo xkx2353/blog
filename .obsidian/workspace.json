@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/life/新博文.md",
+                "file": "_posts/life/2023国庆杂记.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/life/新博文.md",
+                "file": "_posts/life/2023国庆杂记.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/life/新博文.md",
+                "file": "_posts/life/2023国庆杂记.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/life/新博文.md"
+                "file": "_posts/life/2023国庆杂记.md"
               }
             }
           },
@@ -166,10 +166,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e3bd6393d99f98f4",
+  "active": "5516149109c201f9",
   "lastOpenFiles": [
-    "_posts/life/2023国庆.md",
     "_posts/life/新博文.md",
+    "_posts/life/2023国庆杂记.md",
     "_posts/new_blog/如何在obsidian写博客.md",
     "_posts/new_blog",
     "_posts/life/喜欢的歌词.md",
