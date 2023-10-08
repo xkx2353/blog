@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/life/喜欢的歌词.md",
+                "file": "_posts/life/2023国庆.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/life/喜欢的歌词.md",
+                "file": "_posts/life/2023国庆.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/life/喜欢的歌词.md",
+                "file": "_posts/life/2023国庆.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/life/喜欢的歌词.md"
+                "file": "_posts/life/2023国庆.md"
               }
             }
           },
@@ -167,6 +167,8 @@
   },
   "active": "5516149109c201f9",
   "lastOpenFiles": [
+    "_posts/life/喜欢的歌词.md",
+    "_posts/life/2023国庆.md",
     "_posts/life/争斗.md",
     "images/avatar.jpg",
     "_templates/new blog.md",
@@ -200,7 +202,6 @@
     "_posts/life/绿瓶子和黄叶子.md",
     "_posts/life/河西走廊.md",
     "_posts/life/我所喜欢的NBA.md",
-    "_posts/life/喜欢的歌词.md",
     "_posts/life/christmas.md",
     "_posts/framework/spring_webmvc.md",
     "_posts/framework/spring_web.md",
