@@ -390,7 +390,7 @@ example: "\_." matches any character or a line break.
 
 - 19."\<" and "\>" are used to find only whole words.
 - 20.`\&`:"foobeep\&..." matches "foo" in "foobeep";`".*Peter\&.*Bob" `matches in a line containing both "Peter" and "Bob".
-- 21.
+- 21. 
 
 ```
         /star   *       \*      0 or more       as many as possible
@@ -410,6 +410,7 @@ example: "\_." matches any character or a line break.
                 \{-,m}  \{-,m}  0 to m          as few as possible
                 \{-}    \{-}    0 or more       as few as possible
 ```
+涉及到非贪婪匹配
 
 - 22.zero-width::
 
@@ -460,6 +461,12 @@ Use of "\V" means that after it, only a backslash and terminating character
 ```
 
 - 27.\%[]:A sequence of optionally matched atoms. This always matches. It matches as much of the list of atoms it contains as possible.  Thus it stops at the first atom that doesn't match. For example: /r\%[ead] matches "r", "re", "rea" or "read".  The longest that matches is used.
+
+--- 
+#### Insert 模式下的一些快捷操作
+
+
+
 
 
 #### 参考
