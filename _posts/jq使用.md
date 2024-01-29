@@ -27,4 +27,12 @@ curl *******
  --compressed | jq '.result|.[] |.msg' >> chat_timeout.xkx
 
 
+
+// 数据过滤
+
+echo '["apple", "banana", "cherry", "date"]' | jq '.[] | select(. | test("a$") | not)'
+
+echo '["apple", "banana", "cherry", "date"]' | jq '.[] | select(. | test("a$") )'
+
+
 ```
