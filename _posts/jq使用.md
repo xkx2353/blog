@@ -28,13 +28,12 @@ curl *******
 
 
 
-// 数据过滤
-
+// 数据过滤(简单数组)
 echo '["apple", "banana", "cherry", "date"]' | jq '.[] | select(. | test("a$") | not)'
 
 echo '["apple", "banana", "cherry", "date"]' | jq '.[] | select(. | test("a$") )'
 
-// 数据过滤(从数组中选择)
+// 数据过滤(从复杂对象数组中选择)
 echo '[{"msg":"hello","code":"34"},{"msg":"world","code":"56"}]' | jq '.[] | select(.["code"] == "34") | .["msg"]' | tr -d '"'
 
 
