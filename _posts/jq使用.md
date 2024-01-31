@@ -34,5 +34,8 @@ echo '["apple", "banana", "cherry", "date"]' | jq '.[] | select(. | test("a$") |
 
 echo '["apple", "banana", "cherry", "date"]' | jq '.[] | select(. | test("a$") )'
 
+// 数据过滤(从数组中选择)
+echo '[{"msg":"hello","code":"34"},{"msg":"world","code":"56"}]' | jq '.[] | select(.["code"] == "34") | .["msg"]' | tr -d '"'
+
 
 ```
