@@ -7,5 +7,5 @@ tags:
 ---
 
 # hello hugo 
-
 # auto update 
+# git hook  
