@@ -1,8 +1,6 @@
 ---
 title: hugo test
-
-date: 2024-09-20 16:02
-
+date: 2024-09-20 16:05:18
 ---
 
 # hello hugo 
